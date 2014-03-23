@@ -22,6 +22,12 @@
 		A17DD8E818DF39E700E8B6B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CC18DF39E700E8B6B2 /* CoreData.framework */; };
 		A17DD8F018DF39E700E8B6B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A17DD8EE18DF39E700E8B6B2 /* InfoPlist.strings */; };
 		A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8F118DF39E700E8B6B2 /* EventsTests.m */; };
+		A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
+		A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
+		A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */; };
+		A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */; };
+		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
+		A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,11 @@
 		A17DD8ED18DF39E700E8B6B2 /* EventsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EventsTests-Info.plist"; sourceTree = "<group>"; };
 		A17DD8EF18DF39E700E8B6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A17DD8F118DF39E700E8B6B2 /* EventsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsTests.m; sourceTree = "<group>"; };
+		A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A17DD93F18DF600F00E8B6B2 /* AEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMainViewController.h; sourceTree = "<group>"; };
+		A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMainViewController.m; sourceTree = "<group>"; };
+		A17DD94318DF689700E8B6B2 /* AEEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventCell.h; sourceTree = "<group>"; };
+		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +126,13 @@
 		A17DD8CE18DF39E700E8B6B2 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				A17DD93F18DF600F00E8B6B2 /* AEMainViewController.h */,
+				A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */,
+				A17DD94318DF689700E8B6B2 /* AEEventCell.h */,
+				A17DD94418DF689700E8B6B2 /* AEEventCell.m */,
 				A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */,
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
+				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
 				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
 				A17DD8CF18DF39E700E8B6B2 /* Supporting Files */,
@@ -229,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,
 			);
@@ -239,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17DD8F018DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
+				A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */,
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
+				A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */,
+				A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */,
+				A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +470,7 @@
 				A17DD8F718DF39E700E8B6B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A17DD8F818DF39E700E8B6B2 /* Build configuration list for PBXNativeTarget "EventsTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +479,7 @@
 				A17DD8FA18DF39E700E8B6B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
