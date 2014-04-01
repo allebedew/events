@@ -7,6 +7,7 @@
 //
 
 #import "AEAppDelegate.h"
+#import "AEEvent.h"
 
 @implementation AEAppDelegate
 
@@ -14,18 +15,44 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    return YES;
+static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
+
++ (AEAppDelegate*)delegate {
+  return [UIApplication sharedApplication].delegate;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+  [self prefillDatabaseIfNeeded];
+
+  [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  return YES;
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
   [self saveContext];
 }
 
-- (void)saveContext
-{
+- (void)prefillDatabaseIfNeeded {
+  BOOL firstLaunch = ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0);
+  if (firstLaunch) {
+
+    // Prefill database
+    NSString *prefillFilePath = [[NSBundle mainBundle] pathForResource:@"DatabasePrefill" ofType:@"plist"];
+    NSArray *prefillData = [NSArray arrayWithContentsOfFile:prefillFilePath];
+    for (NSDictionary *eventInfo in prefillData) {
+      AEEvent *event = (AEEvent*)[NSEntityDescription insertNewObjectForEntityForName:@"Event"
+                                                               inManagedObjectContext:self.managedObjectContext];
+      event.title = eventInfo[@"title"];
+      event.date = eventInfo[@"date"];
+      event.order = eventInfo[@"order"];
+    }
+    [self saveContext];
+  }
+}
+
+- (void)saveContext {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
@@ -38,8 +65,7 @@
 
 #pragma mark - Core Data stack
 
-- (NSManagedObjectContext *)managedObjectContext
-{
+- (NSManagedObjectContext *)managedObjectContext {
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
@@ -52,18 +78,17 @@
     return _managedObjectContext;
 }
 
-- (NSManagedObjectModel *)managedObjectModel
-{
+- (NSManagedObjectModel *)managedObjectModel {
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
+
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Events" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
 
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
@@ -73,29 +98,6 @@
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
@@ -103,8 +105,7 @@
     return _persistentStoreCoordinator;
 }
 
-- (NSURL *)applicationDocumentsDirectory
-{
+- (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

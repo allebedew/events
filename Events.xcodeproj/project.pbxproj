@@ -28,6 +28,12 @@
 		A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */; };
 		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 		A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
+		A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
+		A1A9949518E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
+		A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
+		A1A9949918E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
+		A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
+		A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,11 @@
 		A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMainViewController.m; sourceTree = "<group>"; };
 		A17DD94318DF689700E8B6B2 /* AEEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventCell.h; sourceTree = "<group>"; };
 		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
+		A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DatabasePrefill.plist; sourceTree = "<group>"; };
+		A1A9949618E794B300E0FA7C /* AEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEvent.h; sourceTree = "<group>"; };
+		A1A9949718E794B300E0FA7C /* AEEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEvent.m; sourceTree = "<group>"; };
+		A1E347A818E8C8C200AE649F /* AEAddEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAddEventCell.h; sourceTree = "<group>"; };
+		A1E347A918E8C8C200AE649F /* AEAddEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAddEventCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,11 +141,16 @@
 				A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */,
 				A17DD94318DF689700E8B6B2 /* AEEventCell.h */,
 				A17DD94418DF689700E8B6B2 /* AEEventCell.m */,
+				A1E347A818E8C8C200AE649F /* AEAddEventCell.h */,
+				A1E347A918E8C8C200AE649F /* AEAddEventCell.m */,
 				A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */,
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
+				A1A9949618E794B300E0FA7C /* AEEvent.h */,
+				A1A9949718E794B300E0FA7C /* AEEvent.m */,
 				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
-				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
+				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
+				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8CF18DF39E700E8B6B2 /* Supporting Files */,
 			);
 			path = Events;
@@ -247,6 +263,7 @@
 			files = (
 				A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
+				A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17DD8F018DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
+				A1A9949518E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,8 +285,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */,
 				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */,
+				A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
 				A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
@@ -279,7 +299,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A9949918E794B300E0FA7C /* AEEvent.m in Sources */,
 				A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */,
+				A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
 			);

@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<array>
+	<dict>
+		<key>title</key>
+		<string>New Year</string>
+		<key>date</key>
+		<date>2014-12-31T22:00:00Z</date>
+		<key>order</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>My Birthday</string>
+		<key>date</key>
+		<date>1985-09-19T20:00:00Z</date>
+		<key>order</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Some Event With Very Looong Title</string>
+		<key>date</key>
+		<date>2015-06-14T21:00:00Z</date>
+		<key>order</key>
+		<integer>2</integer>
+	</dict>
+</array>
 </plist>

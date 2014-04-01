@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class AEEvent;
+
 @interface AEEventCell : UICollectionViewCell
+
+@property (nonatomic, weak) AEEvent *event;
 
 @end
