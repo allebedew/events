@@ -15,13 +15,37 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel *yearLabel;
+@property (nonatomic, weak) IBOutlet UILabel *yearUnitLabel;
+@property (nonatomic, weak) IBOutlet UILabel *monthLabel;
+@property (nonatomic, weak) IBOutlet UILabel *monthUnitLabel;
+@property (nonatomic, weak) IBOutlet UILabel *dayLabel;
+@property (nonatomic, weak) IBOutlet UILabel *dayUnitLabel;
+@property (nonatomic, weak) IBOutlet UILabel *hourLabel;
+@property (nonatomic, weak) IBOutlet UILabel *hourUnitLabel;
+@property (nonatomic, weak) IBOutlet UILabel *minuteLabel;
+@property (nonatomic, weak) IBOutlet UILabel *minuteUnitLabel;
+@property (nonatomic, weak) IBOutlet UILabel *secondLabel;
+@property (nonatomic, weak) IBOutlet UILabel *secondUnitLabel;
 
 @end
 
 @implementation AEEventCell
 
++ (BOOL)requiresConstraintBasedLayout {
+  return NO;
+}
+
 - (void)awakeFromNib {
+  self.clipsToBounds = NO;
+
   self.layer.cornerRadius = 5.0f;
+  self.layer.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f].CGColor;
+  self.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+  self.layer.shadowRadius = 3.0f;
+  self.layer.shadowOpacity = 0.25f;
+
+//  self.layer.shouldRasterize = YES;
 }
 
 - (void)prepareForReuse {
@@ -37,7 +61,35 @@
 
 - (void)updateContent {
   self.titleLabel.text = self.event.title;
-  self.dateLabel.text = self.event.timeIntervalString;
+  [self.titleLabel sizeToFit];
+
+  self.dateLabel.text = self.event.dateString;
+
+  NSDateComponents *components = self.event.intervalDateComponents;
+  self.yearLabel.text = [NSString stringWithFormat:@"%.1d", components.year];
+  self.yearUnitLabel.text = NSLocalizedString(@"YEARS", @"");
+  self.monthLabel.text = [NSString stringWithFormat:@"%.1d", components.month];
+  self.monthUnitLabel.text = NSLocalizedString(@"MONTH", @"");
+  self.dayLabel.text = [NSString stringWithFormat:@"%.1d", components.day];
+  self.dayUnitLabel.text = NSLocalizedString(@"DAYS", @"L");
+  self.hourLabel.text = [NSString stringWithFormat:@"%.1d", components.hour];
+  self.hourUnitLabel.text = NSLocalizedString(@"HOURS", @"");
+  self.minuteLabel.text = [NSString stringWithFormat:@"%.2d", components.minute];
+  self.minuteUnitLabel.text = NSLocalizedString(@"MINUTE", @"");
+  self.secondLabel.text = [NSString stringWithFormat:@"%.2d", components.second];
+  self.secondUnitLabel.text = NSLocalizedString(@"SECONDS", @"");
+}
+
+- (void)layoutSubviews {
+  CGRect titleRect = [self.titleLabel textRectForBounds:self.titleLabel.superview.bounds limitedToNumberOfLines:self.titleLabel.numberOfLines];
+  CGRect dateRect = [self.dateLabel textRectForBounds:self.dateLabel.superview.bounds limitedToNumberOfLines:self.dateLabel.numberOfLines];
+
+  CGFloat totalHeight = titleRect.size.height + 3.0f + dateRect.size.height;
+  titleRect.origin.y = floorf((self.titleLabel.superview.bounds.size.height - totalHeight) / 2.0f);
+  dateRect.origin.y = titleRect.origin.y + titleRect.size.height + 3.0f;
+  
+  self.titleLabel.frame = titleRect;
+  self.dateLabel.frame = dateRect;
 }
 
 @end

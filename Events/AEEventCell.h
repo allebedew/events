@@ -14,4 +14,6 @@
 
 @property (nonatomic, weak) AEEvent *event;
 
+- (void)updateContent;
+
 @end

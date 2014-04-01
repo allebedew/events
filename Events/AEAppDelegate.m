@@ -9,6 +9,12 @@
 #import "AEAppDelegate.h"
 #import "AEEvent.h"
 
+@interface AEAppDelegate ()
+
+@property (nonatomic, strong) UIView *statusBarBacking;
+
+@end
+
 @implementation AEAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -21,17 +27,38 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
   return [UIApplication sharedApplication].delegate;
 }
 
+#pragma mark - App Delegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
   [self prefillDatabaseIfNeeded];
 
   [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
   [[NSUserDefaults standardUserDefaults] synchronize];
+
+  self.window.backgroundColor = [UIColor blackColor];
+  [self performSelector:@selector(updateStatusBarBacking) withObject:nil afterDelay:0.0f];
+
   return YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   [self saveContext];
+}
+
+- (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation {
+  [self performSelector:@selector(updateStatusBarBacking) withObject:nil afterDelay:0.0f];
+}
+
+#pragma mark - Private
+
+- (void)updateStatusBarBacking {
+  if (!self.statusBarBacking) {
+    self.statusBarBacking = [[UIView alloc] init];
+    self.statusBarBacking.backgroundColor = [UIColor colorWithWhite:0.205f alpha:0.75f];
+    [self.window addSubview:self.statusBarBacking];
+  }
+  self.statusBarBacking.frame = [UIApplication sharedApplication].statusBarFrame;
 }
 
 - (void)prefillDatabaseIfNeeded {

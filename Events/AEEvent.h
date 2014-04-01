@@ -14,6 +14,7 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSDate *date;
-@property (nonatomic, readonly) NSString *timeIntervalString;
+@property (nonatomic, readonly) NSString *dateString;
+@property (nonatomic, readonly) NSDateComponents *intervalDateComponents;
 
 @end

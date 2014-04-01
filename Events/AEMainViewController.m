@@ -11,13 +11,20 @@
 #import "AEEventCell.h"
 #import "AEEvent.h"
 
+#define UPDATE_INTERVAL 1.0f
+
 @interface AEMainViewController () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *resultsController;
+@property (nonatomic, weak) NSTimer *updateTimer;
 
 @end
 
 @implementation AEMainViewController
+
+- (void)dealloc {
+  [self stopUpdateTimer];
+}
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -41,11 +48,39 @@
   [self.resultsController performFetch:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self startUpdateTimer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self stopUpdateTimer];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
 #pragma - Private
+
+- (void)startUpdateTimer {
+  [self.updateTimer invalidate];
+  self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
+                                                    selector:@selector(updateCells) userInfo:nil repeats:YES];
+}
+
+- (void)stopUpdateTimer {
+  [self.updateTimer invalidate];
+}
+
+- (void)updateCells {
+  for (UICollectionViewCell *cell in self.collectionView.visibleCells) {
+    if ([cell isKindOfClass:[AEEventCell class]]) {
+      [(AEEventCell*)cell updateContent];
+    }
+  }
+}
 
 - (AEEvent*)eventAtIndexPath:(NSIndexPath*)indexPath {
   if (!indexPath || [self isIndexPathForAddNewCell:indexPath]) {
@@ -66,9 +101,13 @@
 #pragma mark - Actions
 
 - (void)addNewEvent {
-  [NSEntityDescription insertNewObjectForEntityForName:@"Event"
-                                inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
-  [[AEAppDelegate delegate] saveContext];
+
+  UIViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
+  [self presentViewController:editor animated:YES completion:nil];
+
+//  [NSEntityDescription insertNewObjectForEntityForName:@"Event"
+//                                inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
+//  [[AEAppDelegate delegate] saveContext];
 }
 
 - (void)recognizerAction:(UIGestureRecognizer*)recognizer {
@@ -79,23 +118,19 @@
     [[AEAppDelegate delegate].managedObjectContext deleteObject:event];
     [[AEAppDelegate delegate].managedObjectContext save:nil];
   }
-  NSLog(@"index path %@", indexPath);
 }
 
 #pragma mark - Fetched Results Delegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-  NSLog(@"will ch");
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-
   switch(type) {
     case NSFetchedResultsChangeInsert:
       [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
       break;
-
     case NSFetchedResultsChangeDelete:
       [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
       break;
@@ -105,30 +140,24 @@
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-
   switch(type) {
     case NSFetchedResultsChangeInsert:
       [self.collectionView insertItemsAtIndexPaths:@[ newIndexPath ]];
       break;
-
     case NSFetchedResultsChangeDelete:
       [self.collectionView deleteItemsAtIndexPaths:@[ indexPath ]];
       break;
-
     case NSFetchedResultsChangeUpdate:
       [self configureEventCell:(AEEventCell*)[self.collectionView cellForItemAtIndexPath:indexPath]
                    atIndexPath:indexPath];
       break;
-
     case NSFetchedResultsChangeMove:
-      [self.collectionView deleteItemsAtIndexPaths:@[ indexPath ]];
-      [self.collectionView insertItemsAtIndexPaths:@[ newIndexPath ]];
+      [self.collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
       break;
   }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-  NSLog(@"did ch");
 }
 
 #pragma mark - Collection View Delegate

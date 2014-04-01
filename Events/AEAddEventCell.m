@@ -20,6 +20,10 @@
 
 - (void)awakeFromNib {
   self.plusView.layer.cornerRadius = 5.0f;
+  self.plusView.layer.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f].CGColor;
+  self.plusView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+  self.plusView.layer.shadowRadius = 2.0f;
+  self.plusView.layer.shadowOpacity = 0.15f;
 
   [self updateAppearance];
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
+		A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
 		A17DD8C918DF39E700E8B6B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */; };
 		A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
+		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
 		A17DD8C318DF39E700E8B6B2 /* Events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Events.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17DD8C618DF39E700E8B6B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -147,6 +151,8 @@
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
 				A1A9949618E794B300E0FA7C /* AEEvent.h */,
 				A1A9949718E794B300E0FA7C /* AEEvent.m */,
+				A11D457918EB6498003C163D /* AEEventEditorViewController.h */,
+				A11D457A18EB6498003C163D /* AEEventEditorViewController.m */,
 				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
 				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
 				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
@@ -291,6 +297,7 @@
 				A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
+				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
 				A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +310,7 @@
 				A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */,
 				A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */,
+				A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
 				A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
