@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A106314E19196A640076AA7B /* todo in Resources */ = {isa = PBXBuildFile; fileRef = A106314D19196A640076AA7B /* todo */; };
 		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
 		A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A106314D19196A640076AA7B /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
 		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
 		A17DD8C318DF39E700E8B6B2 /* Events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Events.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +145,7 @@
 		A17DD8BA18DF39E700E8B6B2 = {
 			isa = PBXGroup;
 			children = (
+				A106314D19196A640076AA7B /* todo */,
 				A17DD8CE18DF39E700E8B6B2 /* Events */,
 				A17DD8EB18DF39E700E8B6B2 /* EventsTests */,
 				A17DD8C518DF39E700E8B6B2 /* Frameworks */,
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
+				A106314E19196A640076AA7B /* todo in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
 				A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,

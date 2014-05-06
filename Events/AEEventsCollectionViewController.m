@@ -1,4 +1,4 @@
-//
+  //
 //  AEMainViewController.m
 //  Events
 //
@@ -15,7 +15,8 @@
 
 #define COUNTERS_UPDATE_INTERVAL 1.0f
 
-@interface AEEventsCollectionViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
+@interface AEEventsCollectionViewController ()
+  <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *resultsController;
 @property (nonatomic, weak) NSTimer *countersUpdateTimer;
@@ -30,15 +31,6 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-/*
-  UILongPressGestureRecognizer *longPressRecognizer =
-    [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(recognizerAction:)];
-  [self.view addGestureRecognizer:longPressRecognizer];
- */
-  UITapGestureRecognizer *doubleTapRecognizer =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(recognizerAction:)];
-  doubleTapRecognizer.numberOfTapsRequired = 2;
-  [self.view addGestureRecognizer:doubleTapRecognizer];
 
   [self.resultsController performFetch:nil];
 }
@@ -47,6 +39,7 @@
   [super viewWillAppear:animated];
   [self startCountersUpdateTimer];
   [[AEAppDelegate delegate] showStatusBarShader:YES animated:animated];
+  [self deselectSelectedCell];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,7 +52,7 @@
   return UIStatusBarStyleLightContent;
 }
 
-#pragma - Properties
+#pragma mark - Properties
 
 - (NSFetchedResultsController*)resultsController {
   if (!_resultsController) {
@@ -74,7 +67,7 @@
   return _resultsController;
 }
 
-#pragma - Private
+#pragma mark - Private
 
 - (void)startCountersUpdateTimer {
   [self.countersUpdateTimer invalidate];
@@ -101,24 +94,23 @@
   return (AEEvent*)[self.resultsController objectAtIndexPath:indexPath];
 }
 
-- (void)configureEventCell:(AEEventCell*)cell atIndexPath:(NSIndexPath*)indexPath {
-  AEEvent *event = [self.resultsController objectAtIndexPath:indexPath];
-  cell.event = event;
-}
-
 - (BOOL)isIndexPathForAddNewCell:(NSIndexPath*)indexPath {
   return (indexPath.row == ([self collectionView:self.collectionView numberOfItemsInSection:indexPath.section] - 1));
 }
 
-- (void)showEditorForEvent:(AEEvent*)event {
-  UINavigationController *eventNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
+- (void)deselectSelectedCell {
+  [self.collectionView deselectItemAtIndexPath:self.collectionView.indexPathsForSelectedItems.firstObject
+                                      animated:YES];
+}
+
+- (void)showEditorForEvent:(AEEvent*)event completion:(void(^)(BOOL cancelled))completion {
+  UINavigationController *eventNavigationController =
+    [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
   AEEventEditorViewController *eventEditor = (AEEventEditorViewController*)eventNavigationController.topViewController;
   eventEditor.event = event;
   eventEditor.completion = ^(BOOL cancelled) {
     [self dismissViewControllerAnimated:YES completion:nil];
-    if (!cancelled) {
-      [[AEAppDelegate delegate] saveContext];
-    }
+    completion(cancelled);
   };
   [self presentViewController:eventNavigationController animated:YES completion:nil];
 }
@@ -130,7 +122,13 @@
                                             inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
   AEEvent *event = [[AEEvent alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
   event.date = [NSDate date];
-  [self showEditorForEvent:event];
+  [self showEditorForEvent:event completion:^(BOOL cancelled) {
+    if (cancelled) {
+      return;
+    }
+    [[AEAppDelegate delegate].managedObjectContext insertObject:event];
+    [[AEAppDelegate delegate] saveContext];
+  }];
 }
 
 - (void)deleteSelectedEvent {
@@ -147,17 +145,13 @@
   if (!event) {
     return;
   }
-  [self showEditorForEvent:event];
-}
-
-#pragma mark - Recognizer Delegate
-
-- (void)recognizerAction:(UIGestureRecognizer*)recognizer {
-  NSIndexPath *indexPath =
-    [self.collectionView indexPathForItemAtPoint:[recognizer locationInView:self.collectionView]];
-  AEEvent *event = [self eventAtIndexPath:indexPath];
-  if (event) {
-  }
+  [self showEditorForEvent:event completion:^(BOOL cancelled) {
+    if (cancelled) {
+      [[AEAppDelegate delegate].managedObjectContext rollback];
+      return;
+    }
+    [[AEAppDelegate delegate] saveContext];
+  }];
 }
 
 #pragma mark - Fetched Results Delegate
@@ -187,10 +181,11 @@
     case NSFetchedResultsChangeDelete:
       [self.collectionView deleteItemsAtIndexPaths:@[ indexPath ]];
       break;
-    case NSFetchedResultsChangeUpdate:
-      [self configureEventCell:(AEEventCell*)[self.collectionView cellForItemAtIndexPath:indexPath]
-                   atIndexPath:indexPath];
+    case NSFetchedResultsChangeUpdate: {
+      AEEventCell *cell = (AEEventCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+      [self configureEventCell:cell atIndexPath:indexPath];
       break;
+    }
     case NSFetchedResultsChangeMove:
       [self.collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
       break;
@@ -226,6 +221,11 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
   return cell;
 }
 
+- (void)configureEventCell:(AEEventCell*)cell atIndexPath:(NSIndexPath*)indexPath {
+  AEEvent *event = [self.resultsController objectAtIndexPath:indexPath];
+  cell.event = event;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   if ([self isIndexPathForAddNewCell:indexPath]) {
     [self createEventPressed];
@@ -245,8 +245,7 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == actionSheet.cancelButtonIndex) {
-    [self.collectionView deselectItemAtIndexPath:self.collectionView.indexPathsForSelectedItems.firstObject
-                                        animated:YES];
+    [self deselectSelectedCell];
   } else if (buttonIndex == actionSheet.destructiveButtonIndex) {
     [self deleteSelectedEvent];
   } else {

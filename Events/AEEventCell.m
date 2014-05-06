@@ -46,7 +46,7 @@
 
   self.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
   self.selectedBackgroundView.layer.cornerRadius = 5.0f;
-  self.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
+  self.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.35f];
 }
 
 - (void)prepareForReuse {
@@ -70,10 +70,8 @@
 #pragma mark - Public
 
 - (void)setEvent:(AEEvent *)event {
-  if (_event != event) {
-    _event = event;
-    [self updateContent];
-  }
+  _event = event;
+  [self updateContent];
 }
 
 - (void)updateContent {

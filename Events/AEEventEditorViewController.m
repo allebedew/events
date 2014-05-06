@@ -51,7 +51,7 @@
 }
 
 - (void)updateSaveButtonState {
-  self.saveButton.enabled = (self.event.title != nil && self.event.date != nil);
+  self.saveButton.enabled = [self.event validateForUpdate:nil];
 }
 
 - (void)fillViewsWithEventData {

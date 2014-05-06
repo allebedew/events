@@ -30,13 +30,10 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 #pragma mark - App Delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-  [self prefillDatabaseIfNeeded];
-
   [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
   [[NSUserDefaults standardUserDefaults] synchronize];
 
-  self.window.backgroundColor = [UIColor blackColor];
+  [self prefillDatabaseIfNeeded];
 
   [self performSelector:@selector(updateStatusBarShaderFrame) withObject:nil afterDelay:0.0f];
 
@@ -44,7 +41,6 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [self saveContext];
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation {
@@ -140,6 +136,9 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 - (void)showStatusBarShader:(BOOL)show animated:(BOOL)animated {
   if (show && !self.statusBarShader.superview) {
     [self.window addSubview:self.statusBarShader];
+    [self.window performSelector:@selector(bringSubviewToFront:)
+                      withObject:self.statusBarShader
+                      afterDelay:0.0f]; // dirty
   }
   dispatch_block_t animations = ^{
     self.statusBarShader.alpha = show ? 1.0f : 0.0f;
