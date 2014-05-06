@@ -32,25 +32,42 @@
 
 @implementation AEEventCell
 
-+ (BOOL)requiresConstraintBasedLayout {
-  return NO;
-}
-
 - (void)awakeFromNib {
-  self.clipsToBounds = NO;
+  self.backgroundColor = nil;
 
-  self.layer.cornerRadius = 5.0f;
-  self.layer.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f].CGColor;
-  self.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-  self.layer.shadowRadius = 3.0f;
-  self.layer.shadowOpacity = 0.25f;
+  self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.backgroundView.layer.cornerRadius = 5.0f;
+  self.backgroundView.layer.shadowColor = [UIColor colorWithWhite:0.0f alpha:1.0f].CGColor;
+  self.backgroundView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+  self.backgroundView.layer.shadowRadius = 3.0f;
+  self.backgroundView.layer.shadowOpacity = 0.25f;
+  self.backgroundView.backgroundColor = [UIColor colorWithHue:0.6f saturation:0.81f
+                                                   brightness:0.93f alpha:1.0f];
 
-//  self.layer.shouldRasterize = YES;
+  self.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.selectedBackgroundView.layer.cornerRadius = 5.0f;
+  self.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
 }
 
 - (void)prepareForReuse {
   self.event = nil;
 }
+
+- (void)layoutSubviews {
+  CGRect titleRect = [self.titleLabel textRectForBounds:self.titleLabel.superview.bounds
+                                 limitedToNumberOfLines:self.titleLabel.numberOfLines];
+  CGRect dateRect = [self.dateLabel textRectForBounds:self.dateLabel.superview.bounds
+                               limitedToNumberOfLines:self.dateLabel.numberOfLines];
+
+  CGFloat totalHeight = titleRect.size.height + 3.0f + dateRect.size.height;
+  titleRect.origin.y = floorf((self.titleLabel.superview.bounds.size.height - totalHeight) / 2.0f);
+  dateRect.origin.y = titleRect.origin.y + titleRect.size.height + 3.0f;
+
+  self.titleLabel.frame = titleRect;
+  self.dateLabel.frame = dateRect;
+}
+
+#pragma mark - Public
 
 - (void)setEvent:(AEEvent *)event {
   if (_event != event) {
@@ -61,10 +78,12 @@
 
 - (void)updateContent {
   self.titleLabel.text = self.event.title;
-  [self.titleLabel sizeToFit];
-
   self.dateLabel.text = self.event.dateString;
+  [self updateCounterLabels];
+  [self setNeedsLayout];
+}
 
+- (void)updateCounterLabels {
   NSDateComponents *components = self.event.intervalDateComponents;
   self.yearLabel.text = [NSString stringWithFormat:@"%.1d", components.year];
   self.yearUnitLabel.text = NSLocalizedString(@"YEARS", @"");
@@ -78,18 +97,6 @@
   self.minuteUnitLabel.text = NSLocalizedString(@"MINUTE", @"");
   self.secondLabel.text = [NSString stringWithFormat:@"%.2d", components.second];
   self.secondUnitLabel.text = NSLocalizedString(@"SECONDS", @"");
-}
-
-- (void)layoutSubviews {
-  CGRect titleRect = [self.titleLabel textRectForBounds:self.titleLabel.superview.bounds limitedToNumberOfLines:self.titleLabel.numberOfLines];
-  CGRect dateRect = [self.dateLabel textRectForBounds:self.dateLabel.superview.bounds limitedToNumberOfLines:self.dateLabel.numberOfLines];
-
-  CGFloat totalHeight = titleRect.size.height + 3.0f + dateRect.size.height;
-  titleRect.origin.y = floorf((self.titleLabel.superview.bounds.size.height - totalHeight) / 2.0f);
-  dateRect.origin.y = titleRect.origin.y + titleRect.size.height + 3.0f;
-  
-  self.titleLabel.frame = titleRect;
-  self.dateLabel.frame = dateRect;
 }
 
 @end

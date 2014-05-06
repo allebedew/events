@@ -14,6 +14,6 @@
 
 @property (nonatomic, weak) AEEvent *event;
 
-- (void)updateContent;
+- (void)updateCounterLabels;
 
 @end

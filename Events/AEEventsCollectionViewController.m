@@ -6,24 +6,26 @@
 //  Copyright (c) 2014 Aleksey Lebedev. All rights reserved.
 //
 
-#import "AEMainViewController.h"
+#import "AEEventsCollectionViewController.h"
+
 #import "AEAppDelegate.h"
 #import "AEEventCell.h"
 #import "AEEvent.h"
+#import "AEEventEditorViewController.h"
 
-#define UPDATE_INTERVAL 1.0f
+#define COUNTERS_UPDATE_INTERVAL 1.0f
 
-@interface AEMainViewController () <NSFetchedResultsControllerDelegate>
+@interface AEEventsCollectionViewController () <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *resultsController;
-@property (nonatomic, weak) NSTimer *updateTimer;
+@property (nonatomic, weak) NSTimer *countersUpdateTimer;
 
 @end
 
-@implementation AEMainViewController
+@implementation AEEventsCollectionViewController
 
 - (void)dealloc {
-  [self stopUpdateTimer];
+  [self stopCountersUpdateTimer];
 }
 
 - (void)viewDidLoad {
@@ -38,46 +40,56 @@
   doubleTapRecognizer.numberOfTapsRequired = 2;
   [self.view addGestureRecognizer:doubleTapRecognizer];
 
-  NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
-  request.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES] ];
-  self.resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                               managedObjectContext:[AEAppDelegate delegate].managedObjectContext
-                                                                 sectionNameKeyPath:nil
-                                                                          cacheName:nil];
-  self.resultsController.delegate = self;
   [self.resultsController performFetch:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  [self startUpdateTimer];
+  [self startCountersUpdateTimer];
+  [[AEAppDelegate delegate] showStatusBarShader:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
   [super viewWillDisappear:animated];
-  [self stopUpdateTimer];
+  [self stopCountersUpdateTimer];
+  [[AEAppDelegate delegate] showStatusBarShader:NO animated:animated];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
 }
 
+#pragma - Properties
+
+- (NSFetchedResultsController*)resultsController {
+  if (!_resultsController) {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
+    request.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES] ];
+    _resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                             managedObjectContext:[AEAppDelegate delegate].managedObjectContext
+                                                               sectionNameKeyPath:nil
+                                                                        cacheName:nil];
+    _resultsController.delegate = self;
+  }
+  return _resultsController;
+}
+
 #pragma - Private
 
-- (void)startUpdateTimer {
-  [self.updateTimer invalidate];
-  self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
-                                                    selector:@selector(updateCells) userInfo:nil repeats:YES];
+- (void)startCountersUpdateTimer {
+  [self.countersUpdateTimer invalidate];
+  self.countersUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:COUNTERS_UPDATE_INTERVAL target:self
+                                                            selector:@selector(updateCountersOnVisibleCells) userInfo:nil repeats:YES];
 }
 
-- (void)stopUpdateTimer {
-  [self.updateTimer invalidate];
+- (void)stopCountersUpdateTimer {
+  [self.countersUpdateTimer invalidate];
 }
 
-- (void)updateCells {
+- (void)updateCountersOnVisibleCells {
   for (UICollectionViewCell *cell in self.collectionView.visibleCells) {
     if ([cell isKindOfClass:[AEEventCell class]]) {
-      [(AEEventCell*)cell updateContent];
+      [(AEEventCell*)cell updateCounterLabels];
     }
   }
 }
@@ -95,28 +107,56 @@
 }
 
 - (BOOL)isIndexPathForAddNewCell:(NSIndexPath*)indexPath {
-  return indexPath.row == [self collectionView:self.collectionView numberOfItemsInSection:0] - 1;
+  return (indexPath.row == ([self collectionView:self.collectionView numberOfItemsInSection:indexPath.section] - 1));
+}
+
+- (void)showEditorForEvent:(AEEvent*)event {
+  UINavigationController *eventNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
+  AEEventEditorViewController *eventEditor = (AEEventEditorViewController*)eventNavigationController.topViewController;
+  eventEditor.event = event;
+  eventEditor.completion = ^(BOOL cancelled) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!cancelled) {
+      [[AEAppDelegate delegate] saveContext];
+    }
+  };
+  [self presentViewController:eventNavigationController animated:YES completion:nil];
 }
 
 #pragma mark - Actions
 
-- (void)addNewEvent {
-
-  UIViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
-  [self presentViewController:editor animated:YES completion:nil];
-
-//  [NSEntityDescription insertNewObjectForEntityForName:@"Event"
-//                                inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
-//  [[AEAppDelegate delegate] saveContext];
+- (void)createEventPressed {
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                            inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
+  AEEvent *event = [[AEEvent alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+  event.date = [NSDate date];
+  [self showEditorForEvent:event];
 }
+
+- (void)deleteSelectedEvent {
+  AEEvent *event = [self eventAtIndexPath:self.collectionView.indexPathsForSelectedItems.firstObject];
+  if (!event) {
+    return;
+  }
+  [[AEAppDelegate delegate].managedObjectContext deleteObject:event];
+  [[AEAppDelegate delegate] saveContext];
+}
+
+- (void)editSelectedEvent {
+  AEEvent *event = [self eventAtIndexPath:self.collectionView.indexPathsForSelectedItems.firstObject];
+  if (!event) {
+    return;
+  }
+  [self showEditorForEvent:event];
+}
+
+#pragma mark - Recognizer Delegate
 
 - (void)recognizerAction:(UIGestureRecognizer*)recognizer {
   NSIndexPath *indexPath =
     [self.collectionView indexPathForItemAtPoint:[recognizer locationInView:self.collectionView]];
   AEEvent *event = [self eventAtIndexPath:indexPath];
   if (event) {
-    [[AEAppDelegate delegate].managedObjectContext deleteObject:event];
-    [[AEAppDelegate delegate].managedObjectContext save:nil];
   }
 }
 
@@ -187,13 +227,31 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-  [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-  UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-  if ([cell.reuseIdentifier isEqual:AEAddEventCellIdentifier]) {
-    [self addNewEvent];
+  if ([self isIndexPathForAddNewCell:indexPath]) {
+    [self createEventPressed];
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+  } else {
+    AEEvent *event = [self eventAtIndexPath:indexPath];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:event.title
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                         destructiveButtonTitle:NSLocalizedString(@"Delete", nil)
+                                              otherButtonTitles:NSLocalizedString(@"Edit", nil), nil];
+    [sheet showInView:self.view];
   }
 }
 
+#pragma mark - Action Sheet Delegate
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == actionSheet.cancelButtonIndex) {
+    [self.collectionView deselectItemAtIndexPath:self.collectionView.indexPathsForSelectedItems.firstObject
+                                        animated:YES];
+  } else if (buttonIndex == actionSheet.destructiveButtonIndex) {
+    [self deleteSelectedEvent];
+  } else {
+    [self editSelectedEvent];
+  }
+}
 
 @end

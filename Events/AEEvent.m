@@ -30,8 +30,6 @@
 
 - (void)awakeFromInsert {
   [self setPrimitiveValue:[self fetchNextOrderValue] forKey:@"order"];
-  [self setPrimitiveValue:@"New Event" forKey:@"title"];
-  [self setPrimitiveValue:[NSDate date] forKey:@"date"];
 }
 
 #pragma mark - Custom Properties

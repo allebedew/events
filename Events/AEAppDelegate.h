@@ -21,4 +21,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)showStatusBarShader:(BOOL)show animated:(BOOL)animated;
+
 @end

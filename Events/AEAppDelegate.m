@@ -11,7 +11,7 @@
 
 @interface AEAppDelegate ()
 
-@property (nonatomic, strong) UIView *statusBarBacking;
+@property (nonatomic, strong) UIView *statusBarShader;
 
 @end
 
@@ -37,7 +37,8 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
   [[NSUserDefaults standardUserDefaults] synchronize];
 
   self.window.backgroundColor = [UIColor blackColor];
-  [self performSelector:@selector(updateStatusBarBacking) withObject:nil afterDelay:0.0f];
+
+  [self performSelector:@selector(updateStatusBarShaderFrame) withObject:nil afterDelay:0.0f];
 
   return YES;
 }
@@ -47,19 +48,10 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation {
-  [self performSelector:@selector(updateStatusBarBacking) withObject:nil afterDelay:0.0f];
+  [self performSelector:@selector(updateStatusBarShaderFrame) withObject:nil afterDelay:0.0f];
 }
 
 #pragma mark - Private
-
-- (void)updateStatusBarBacking {
-  if (!self.statusBarBacking) {
-    self.statusBarBacking = [[UIView alloc] init];
-    self.statusBarBacking.backgroundColor = [UIColor colorWithWhite:0.205f alpha:0.75f];
-    [self.window addSubview:self.statusBarBacking];
-  }
-  self.statusBarBacking.frame = [UIApplication sharedApplication].statusBarFrame;
-}
 
 - (void)prefillDatabaseIfNeeded {
   BOOL firstLaunch = ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0);
@@ -96,7 +88,6 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
-    
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
@@ -109,7 +100,6 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Events" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
@@ -119,21 +109,46 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Events.sqlite"];
-    
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }    
-    
+    }
     return _persistentStoreCoordinator;
 }
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Public
+
+- (UIView*)statusBarShader {
+  if (!_statusBarShader) {
+    _statusBarShader = [[UIView alloc] init];
+    _statusBarShader.backgroundColor = [UIColor colorWithWhite:0.205f alpha:0.75f];
+  }
+  return _statusBarShader;
+}
+
+- (void)updateStatusBarShaderFrame {
+  self.statusBarShader.frame = [UIApplication sharedApplication].statusBarFrame;
+}
+
+- (void)showStatusBarShader:(BOOL)show animated:(BOOL)animated {
+  if (show && !self.statusBarShader.superview) {
+    [self.window addSubview:self.statusBarShader];
+  }
+  dispatch_block_t animations = ^{
+    self.statusBarShader.alpha = show ? 1.0f : 0.0f;
+  };
+  if (animated) {
+    [UIView animateWithDuration:0.3f animations:animations];
+  } else {
+    animations();
+  }
 }
 
 @end

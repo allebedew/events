@@ -26,8 +26,8 @@
 		A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8F118DF39E700E8B6B2 /* EventsTests.m */; };
 		A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
 		A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
-		A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */; };
-		A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */; };
+		A17DD94118DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */; };
+		A17DD94218DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */; };
 		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 		A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 		A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
@@ -70,8 +70,8 @@
 		A17DD8EF18DF39E700E8B6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A17DD8F118DF39E700E8B6B2 /* EventsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsTests.m; sourceTree = "<group>"; };
 		A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A17DD93F18DF600F00E8B6B2 /* AEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMainViewController.h; sourceTree = "<group>"; };
-		A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMainViewController.m; sourceTree = "<group>"; };
+		A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventsCollectionViewController.h; sourceTree = "<group>"; };
+		A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventsCollectionViewController.m; sourceTree = "<group>"; };
 		A17DD94318DF689700E8B6B2 /* AEEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventCell.h; sourceTree = "<group>"; };
 		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
 		A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DatabasePrefill.plist; sourceTree = "<group>"; };
@@ -107,6 +107,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A106314A191951DD0076AA7B /* Events Collection */ = {
+			isa = PBXGroup;
+			children = (
+				A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionViewController.h */,
+				A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */,
+				A17DD94318DF689700E8B6B2 /* AEEventCell.h */,
+				A17DD94418DF689700E8B6B2 /* AEEventCell.m */,
+				A1E347A818E8C8C200AE649F /* AEAddEventCell.h */,
+				A1E347A918E8C8C200AE649F /* AEAddEventCell.m */,
+			);
+			name = "Events Collection";
+			sourceTree = "<group>";
+		};
+		A106314B191951FD0076AA7B /* Events Editor */ = {
+			isa = PBXGroup;
+			children = (
+				A11D457918EB6498003C163D /* AEEventEditorViewController.h */,
+				A11D457A18EB6498003C163D /* AEEventEditorViewController.m */,
+			);
+			name = "Events Editor";
+			sourceTree = "<group>";
+		};
+		A106314C191952110076AA7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A1A9949618E794B300E0FA7C /* AEEvent.h */,
+				A1A9949718E794B300E0FA7C /* AEEvent.m */,
+				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
+				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A17DD8BA18DF39E700E8B6B2 = {
 			isa = PBXGroup;
 			children = (
@@ -141,21 +174,12 @@
 		A17DD8CE18DF39E700E8B6B2 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				A17DD93F18DF600F00E8B6B2 /* AEMainViewController.h */,
-				A17DD94018DF600F00E8B6B2 /* AEMainViewController.m */,
-				A17DD94318DF689700E8B6B2 /* AEEventCell.h */,
-				A17DD94418DF689700E8B6B2 /* AEEventCell.m */,
-				A1E347A818E8C8C200AE649F /* AEAddEventCell.h */,
-				A1E347A918E8C8C200AE649F /* AEAddEventCell.m */,
+				A106314C191952110076AA7B /* Model */,
+				A106314B191951FD0076AA7B /* Events Editor */,
+				A106314A191951DD0076AA7B /* Events Collection */,
 				A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */,
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
-				A1A9949618E794B300E0FA7C /* AEEvent.h */,
-				A1A9949718E794B300E0FA7C /* AEEvent.m */,
-				A11D457918EB6498003C163D /* AEEventEditorViewController.h */,
-				A11D457A18EB6498003C163D /* AEEventEditorViewController.m */,
 				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
-				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
-				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
 				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8CF18DF39E700E8B6B2 /* Supporting Files */,
 			);
@@ -298,7 +322,7 @@
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
 				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
-				A17DD94118DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
+				A17DD94118DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +335,7 @@
 				A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
-				A17DD94218DF600F00E8B6B2 /* AEMainViewController.m in Sources */,
+				A17DD94218DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
