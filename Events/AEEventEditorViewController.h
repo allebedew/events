@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^AEEventEditorViewControllerCompletion)(BOOL cancelled);
-
 @class AEEvent;
 
 @interface AEEventEditorViewController : UITableViewController
 
 @property (nonatomic, strong) AEEvent *event;
-@property (nonatomic, copy) AEEventEditorViewControllerCompletion completion;
+@property (nonatomic, copy) void(^doneEditingBlock)(BOOL cancelled);
 
 @end

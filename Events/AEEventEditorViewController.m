@@ -7,7 +7,12 @@
 //
 
 #import "AEEventEditorViewController.h"
+
 #import "AEEvent.h"
+#import "AEColorSelectorViewController.h"
+#import "AEColorSelectorCell.h"
+
+#define UPDATE_INTERVAL 1.0f
 
 @interface AEEventEditorViewController () <UITextFieldDelegate>
 
@@ -19,16 +24,28 @@
 @property (nonatomic, weak) IBOutlet UITextField *titleTextField;
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *intervalLabel;
+@property (nonatomic, weak) IBOutlet AEColorSelectorCell *colorCell;
 
 @property (nonatomic, assign) BOOL datePickerShown;
 @property (nonatomic, strong) NSIndexPath *lastSelectedRow;
+@property (nonatomic, weak) NSTimer *updateTimer;
 
 @end
 
 @implementation AEEventEditorViewController
 
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)dealloc {
+
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+
   self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                   target:self action:@selector(doneButtonPressed:)];
   self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
@@ -38,6 +55,48 @@
   [self fillViewsWithEventData];
   [self updateNavigationButtonsAnimated:NO];
   [self updateSaveButtonState];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self startUpdateTimer];
+  [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self stopUpdateTimer];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.identifier isEqualToString:@"SelectColor"]) {
+    [self hideDatePicker];
+
+    __weak AEEventEditorViewController *weakSelf = self;
+    __weak AEColorSelectorViewController *colorSelector =
+      (AEColorSelectorViewController*)segue.destinationViewController;
+    colorSelector.selectedColor = self.event.color;
+    colorSelector.colorSelectedBlock = ^{
+      weakSelf.event.color = colorSelector.selectedColor;
+      [weakSelf fillViewsWithEventData];
+      [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+  }
+}
+
+- (void)startUpdateTimer {
+  [self.updateTimer invalidate];
+  self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
+                                                    selector:@selector(updateIntervalLabel)
+                                                    userInfo:nil repeats:YES];
+}
+
+- (void)stopUpdateTimer {
+  [self.updateTimer invalidate];
+}
+
+- (void)updateIntervalLabel {
+  self.intervalLabel.text = self.event.intervalString;
 }
 
 - (void)updateNavigationButtonsAnimated:(BOOL)animated {
@@ -59,6 +118,7 @@
   if (self.event.date) {
     self.datePicker.date = self.event.date;
   }
+  self.colorCell.color = self.event.color;
   [self fillDateCellsWithEventData];
 }
 
@@ -72,6 +132,7 @@
   for (UITableViewCell *cell in self.tableView.visibleCells) {
     [cell setNeedsLayout];
   }
+  self.intervalLabel.text = self.event.intervalString;
 }
 
 - (BOOL)isDateCellSelected {
@@ -85,7 +146,7 @@
 }
 
 - (void)showDatePicker {
-  [self.titleTextField resignFirstResponder];
+  [self saveTitleAndHideKeyboard];
 
   if (self.datePickerShown) {
     return;
@@ -106,25 +167,29 @@
                         withRowAnimation:UITableViewRowAnimationMiddle];
 }
 
-#pragma mark - User Actions
-
-- (void)cancelButtonPressed:(id)sender {
-  if (self.completion) {
-    self.completion(YES);
-  }
-}
-
-- (void)saveButtonPressed:(id)sender {
-  if (self.completion) {
-    self.completion(NO);
-  }
-}
-
-- (void)doneButtonPressed:(id)sender {
+- (void)saveTitleAndHideKeyboard {
   if ([self.titleTextField isFirstResponder]) {
     self.event.title = self.titleTextField.text;
     [self.titleTextField resignFirstResponder];
   }
+}
+
+#pragma mark - User Actions
+
+- (void)cancelButtonPressed:(id)sender {
+  if (self.doneEditingBlock) {
+    self.doneEditingBlock(YES);
+  }
+}
+
+- (void)saveButtonPressed:(id)sender {
+  if (self.doneEditingBlock) {
+    self.doneEditingBlock(NO);
+  }
+}
+
+- (void)doneButtonPressed:(id)sender {
+  [self saveTitleAndHideKeyboard];
 }
 
 - (void)dateCellSelected {
@@ -162,11 +227,10 @@
 #pragma mark - Table View Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  switch (section) {
-    case 0: return 1;
-    case 1: return self.datePickerShown ? 3 : 2;
+  if (section == 1) {
+    return self.datePickerShown ? 3 : 2;
   }
-  return 0;
+  return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

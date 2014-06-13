@@ -83,18 +83,36 @@
 
 - (void)updateCounterLabels {
   NSDateComponents *components = self.event.intervalDateComponents;
-  self.yearLabel.text = [NSString stringWithFormat:@"%.1d", components.year];
-  self.yearUnitLabel.text = NSLocalizedString(@"YEARS", @"");
-  self.monthLabel.text = [NSString stringWithFormat:@"%.1d", components.month];
-  self.monthUnitLabel.text = NSLocalizedString(@"MONTH", @"");
-  self.dayLabel.text = [NSString stringWithFormat:@"%.1d", components.day];
-  self.dayUnitLabel.text = NSLocalizedString(@"DAYS", @"L");
-  self.hourLabel.text = [NSString stringWithFormat:@"%.1d", components.hour];
-  self.hourUnitLabel.text = NSLocalizedString(@"HOURS", @"");
-  self.minuteLabel.text = [NSString stringWithFormat:@"%.2d", components.minute];
-  self.minuteUnitLabel.text = NSLocalizedString(@"MINUTE", @"");
-  self.secondLabel.text = [NSString stringWithFormat:@"%.2d", components.second];
-  self.secondUnitLabel.text = NSLocalizedString(@"SECONDS", @"");
+  self.yearLabel.text = [NSString stringWithFormat:@"%.1ld", (long)components.year];
+  self.yearUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d years", @""), components.year] uppercaseString];
+
+
+  self.monthLabel.text = [NSString stringWithFormat:@"%.1ld", (long)components.month];
+  self.monthUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d months", @""), components.month] uppercaseString];
+
+  self.dayLabel.text = [NSString stringWithFormat:@"%.1ld", (long)components.day];
+  self.dayUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d days", @""), components.day] uppercaseString];
+
+  self.hourLabel.text = [NSString stringWithFormat:@"%.1ld", (long)components.hour];
+  self.hourUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d hours", @""), components.hour] uppercaseString];
+
+  self.minuteLabel.text = [NSString stringWithFormat:@"%.2ld", (long)components.minute];
+  self.minuteUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d minutes", @""), components.minute] uppercaseString];
+
+  self.secondLabel.text = [NSString stringWithFormat:@"%.2ld", (long)components.second];
+  self.secondUnitLabel.text =
+    [[NSString localizedStringWithFormat:
+      NSLocalizedString(@"%d seconds", @""), components.second] uppercaseString];
 }
 
 @end

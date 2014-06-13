@@ -35,6 +35,14 @@
 		A1A9949518E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
 		A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
 		A1A9949918E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
+		A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78C194B7D60003149A9 /* AEItemColor.m */; };
+		A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */; };
+		A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */; };
+		A1D3C795194B926E003149A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C794194B926E003149A9 /* QuartzCore.framework */; };
+		A1D3C799194B9ED0003149A9 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */; };
+		A1D3C79B194B9F9E003149A9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */; };
+		A1D3C79D194BA941003149A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1D3C79C194BA941003149A9 /* Localizable.strings */; };
+		A1D3C79F194BA993003149A9 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A1D3C79E194BA993003149A9 /* Localizable.stringsdict */; };
 		A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
 		A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
 /* End PBXBuildFile section */
@@ -79,6 +87,18 @@
 		A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DatabasePrefill.plist; sourceTree = "<group>"; };
 		A1A9949618E794B300E0FA7C /* AEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEvent.h; sourceTree = "<group>"; };
 		A1A9949718E794B300E0FA7C /* AEEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEvent.m; sourceTree = "<group>"; };
+		A1D3C78B194B7D60003149A9 /* AEItemColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEItemColor.h; sourceTree = "<group>"; };
+		A1D3C78C194B7D60003149A9 /* AEItemColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEItemColor.m; sourceTree = "<group>"; };
+		A1D3C78E194B834D003149A9 /* AEColorSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEColorSelectorViewController.h; sourceTree = "<group>"; };
+		A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEColorSelectorViewController.m; sourceTree = "<group>"; };
+		A1D3C791194B85AC003149A9 /* AEColorSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEColorSelectorCell.h; sourceTree = "<group>"; };
+		A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEColorSelectorCell.m; sourceTree = "<group>"; };
+		A1D3C794194B926E003149A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A1D3C797194B9ED0003149A9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.0.0.a; sourceTree = "<group>"; };
+		A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A1D3C79C194BA941003149A9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		A1D3C79E194BA993003149A9 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		A1E347A818E8C8C200AE649F /* AEAddEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAddEventCell.h; sourceTree = "<group>"; };
 		A1E347A918E8C8C200AE649F /* AEAddEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAddEventCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,10 +108,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D3C79B194B9F9E003149A9 /* SystemConfiguration.framework in Frameworks */,
+				A1D3C795194B926E003149A9 /* QuartzCore.framework in Frameworks */,
 				A17DD8C918DF39E700E8B6B2 /* CoreGraphics.framework in Frameworks */,
 				A17DD8CD18DF39E700E8B6B2 /* CoreData.framework in Frameworks */,
 				A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */,
 				A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */,
+				A1D3C799194B9ED0003149A9 /* libFlurry_5.0.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +150,10 @@
 			children = (
 				A11D457918EB6498003C163D /* AEEventEditorViewController.h */,
 				A11D457A18EB6498003C163D /* AEEventEditorViewController.m */,
+				A1D3C78E194B834D003149A9 /* AEColorSelectorViewController.h */,
+				A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */,
+				A1D3C791194B85AC003149A9 /* AEColorSelectorCell.h */,
+				A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */,
 			);
 			name = "Events Editor";
 			sourceTree = "<group>";
@@ -138,6 +165,8 @@
 				A1A9949718E794B300E0FA7C /* AEEvent.m */,
 				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
 				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
+				A1D3C78B194B7D60003149A9 /* AEItemColor.h */,
+				A1D3C78C194B7D60003149A9 /* AEItemColor.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -146,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				A106314D19196A640076AA7B /* todo */,
+				A1D3C796194B9ED0003149A9 /* Flurry */,
 				A17DD8CE18DF39E700E8B6B2 /* Events */,
 				A17DD8EB18DF39E700E8B6B2 /* EventsTests */,
 				A17DD8C518DF39E700E8B6B2 /* Frameworks */,
@@ -165,6 +195,8 @@
 		A17DD8C518DF39E700E8B6B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */,
+				A1D3C794194B926E003149A9 /* QuartzCore.framework */,
 				A17DD8C618DF39E700E8B6B2 /* Foundation.framework */,
 				A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */,
 				A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */,
@@ -178,8 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				A106314C191952110076AA7B /* Model */,
-				A106314B191951FD0076AA7B /* Events Editor */,
 				A106314A191951DD0076AA7B /* Events Collection */,
+				A106314B191951FD0076AA7B /* Events Editor */,
 				A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */,
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
 				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
@@ -192,6 +224,8 @@
 		A17DD8CF18DF39E700E8B6B2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1D3C79E194BA993003149A9 /* Localizable.stringsdict */,
+				A1D3C79C194BA941003149A9 /* Localizable.strings */,
 				A17DD8D018DF39E700E8B6B2 /* Events-Info.plist */,
 				A17DD8D118DF39E700E8B6B2 /* InfoPlist.strings */,
 				A17DD8D418DF39E700E8B6B2 /* main.m */,
@@ -216,6 +250,15 @@
 				A17DD8EE18DF39E700E8B6B2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A1D3C796194B9ED0003149A9 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				A1D3C797194B9ED0003149A9 /* Flurry.h */,
+				A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,8 +338,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
+				A1D3C79D194BA941003149A9 /* Localizable.strings in Resources */,
 				A106314E19196A640076AA7B /* todo in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
+				A1D3C79F194BA993003149A9 /* Localizable.stringsdict in Resources */,
 				A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,
 			);
@@ -320,11 +365,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */,
+				A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */,
 				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
+				A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */,
 				A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */,
 				A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
+				A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */,
 				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
 				A17DD94118DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */,
 			);
@@ -451,6 +499,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -464,6 +516,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -9,6 +9,8 @@
 		<date>2014-12-31T22:00:00Z</date>
 		<key>order</key>
 		<integer>0</integer>
+		<key>colorIdentifier</key>
+		<string>blue</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -17,6 +19,8 @@
 		<date>1985-09-19T20:00:00Z</date>
 		<key>order</key>
 		<integer>1</integer>
+		<key>colorIdentifier</key>
+		<string>blue</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -25,6 +29,8 @@
 		<date>2015-06-14T21:00:00Z</date>
 		<key>order</key>
 		<integer>2</integer>
+		<key>colorIdentifier</key>
+		<string>red</string>
 	</dict>
 </array>
 </plist>

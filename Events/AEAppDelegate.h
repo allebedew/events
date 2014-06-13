@@ -23,4 +23,6 @@
 
 - (void)showStatusBarShader:(BOOL)show animated:(BOOL)animated;
 
+- (NSNumber*)fetchLastOrderValue;
+
 @end

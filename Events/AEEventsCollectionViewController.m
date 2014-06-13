@@ -108,7 +108,7 @@
     [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
   AEEventEditorViewController *eventEditor = (AEEventEditorViewController*)eventNavigationController.topViewController;
   eventEditor.event = event;
-  eventEditor.completion = ^(BOOL cancelled) {
+  eventEditor.doneEditingBlock = ^(BOOL cancelled) {
     [self dismissViewControllerAnimated:YES completion:nil];
     completion(cancelled);
   };
@@ -121,7 +121,7 @@
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
                                             inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
   AEEvent *event = [[AEEvent alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-  event.date = [NSDate date];
+  [event setInitialValues];
   [self showEditorForEvent:event completion:^(BOOL cancelled) {
     if (cancelled) {
       return;

@@ -1,4 +1,4 @@
-//
+
 //  AEAppDelegate.m
 //  Events
 //
@@ -7,7 +7,9 @@
 //
 
 #import "AEAppDelegate.h"
+
 #import "AEEvent.h"
+#import "Flurry.h"
 
 @interface AEAppDelegate ()
 
@@ -30,10 +32,13 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 #pragma mark - App Delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
-  [[NSUserDefaults standardUserDefaults] synchronize];
+  [Flurry startSession:@"6DF95P9PP3ZY42PBW5NV"];
 
   [self prefillDatabaseIfNeeded];
+//  [self addALotOfRandomEvents];
+
+  [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
+  [[NSUserDefaults standardUserDefaults] synchronize];
 
   [self performSelector:@selector(updateStatusBarShaderFrame) withObject:nil afterDelay:0.0f];
 
@@ -49,6 +54,22 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 
 #pragma mark - Private
 
+- (void)addALotOfRandomEvents {
+  for (int i = 0; i < 500; ++i) {
+    AEEvent *event = (AEEvent*)[NSEntityDescription insertNewObjectForEntityForName:@"Event"
+                                                             inManagedObjectContext:self.managedObjectContext];
+    [event setInitialValues];
+    event.title = [NSString stringWithFormat:@"Random Event #%d", i];
+
+    UInt32 range = 1000000000;
+    NSTimeInterval interval = (range / 2) - arc4random_uniform(range);
+    NSLog(@"res interval: %.0f", interval);
+
+    event.date = [NSDate dateWithTimeIntervalSinceNow:interval];
+  }
+  [self saveContext];
+}
+
 - (void)prefillDatabaseIfNeeded {
   BOOL firstLaunch = ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0);
   if (firstLaunch) {
@@ -62,6 +83,7 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
       event.title = eventInfo[@"title"];
       event.date = eventInfo[@"date"];
       event.order = eventInfo[@"order"];
+      event.colorIdentifier = eventInfo[@"colorIdentifier"];
     }
     [self saveContext];
   }
@@ -76,6 +98,25 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
             abort();
         } 
     }
+}
+
+- (NSNumber*)fetchLastOrderValue {
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                            inManagedObjectContext:self.managedObjectContext];
+
+  NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:entity.name];
+  req.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:NO] ];
+  req.fetchLimit = 1;
+  req.resultType = NSDictionaryResultType;
+  req.propertiesToFetch = @[ entity.propertiesByName[@"order"] ];
+  NSError *error = nil;
+  NSArray *result = [self.managedObjectContext executeFetchRequest:req error:&error];
+  NSNumber *maxOrder = result.firstObject[@"order"];
+  if (error) {
+    NSLog(@"max order fetch error: %@", error);
+    return nil;
+  }
+  return maxOrder;
 }
 
 #pragma mark - Core Data stack
@@ -148,6 +189,21 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
   } else {
     animations();
   }
+}
+
+@end
+
+@implementation UINavigationController (Rotation)
+
+- (NSUInteger)supportedInterfaceOrientations {
+  if (self.topViewController.presentedViewController) {
+    return self.topViewController.presentedViewController.supportedInterfaceOrientations;
+  }
+  return self.topViewController.supportedInterfaceOrientations;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+  return self.topViewController.preferredInterfaceOrientationForPresentation;
 }
 
 @end
