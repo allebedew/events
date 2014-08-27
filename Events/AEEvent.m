@@ -17,10 +17,20 @@
 
 #pragma mark - Public
 
-- (void)setInitialValues {
-  self.order = @([[[AEAppDelegate delegate] fetchLastOrderValue] integerValue] + 1);
-  self.color = [AEItemColor randomColor];
-  self.date = [NSDate date];
++ (AEEvent*)eventWithTitle:(NSString*)title date:(NSDate*)date color:(AEItemColor*)color
+                   context:(NSManagedObjectContext*)context insert:(BOOL)insert {
+  if (!context) {
+    context = [AEAppDelegate delegate].managedObjectContext;
+  }
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
+                                            inManagedObjectContext:context];
+  AEEvent *event = [[AEEvent alloc] initWithEntity:entity
+                    insertIntoManagedObjectContext:insert ? context : nil];
+  event.title = title;
+  event.date = date ? date : [NSDate date];
+  event.color = color ? color : [AEItemColor randomColor];
+  event.order = @([[[AEAppDelegate delegate] fetchLastOrderValue] integerValue] + 1);
+  return event;
 }
 
 #pragma mark - Custom Properties
@@ -58,25 +68,32 @@
   }
   if (components.month > 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d months", @""), components.month];
-    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", components.month, unit]];
+    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.month, unit]];
   }
   if (components.day > 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d days", @""), components.day];
-    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", components.day, unit]];
+    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.day, unit]];
   }
   if (components.hour > 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d hours", @""), components.hour];
-    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", components.hour, unit]];
+    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.hour, unit]];
   }
   if (components.minute > 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d minutes", @""), components.minute];
-    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", components.minute, unit]];
+    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.minute, unit]];
   }
   if (components.second > 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d seconds", @""), components.second];
-    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", components.second, unit]];
+    [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.second, unit]];
   }
-  return [stringComponents componentsJoinedByString:@", "];
+  
+  if (stringComponents.count > 3) {
+    NSString *firstLine = [[stringComponents subarrayWithRange:NSMakeRange(0, 3)] componentsJoinedByString:@", "];
+    NSString *secondLine = [[stringComponents subarrayWithRange:NSMakeRange(3, stringComponents.count - 3)] componentsJoinedByString:@", "];
+    return [NSString stringWithFormat:@"%@\n%@", firstLine, secondLine];
+  } else {
+    return [stringComponents componentsJoinedByString:@", "];
+  }
 }
 
 - (AEItemColor*)color {

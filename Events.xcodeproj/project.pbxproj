@@ -209,12 +209,12 @@
 		A17DD8CE18DF39E700E8B6B2 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
 				A106314C191952110076AA7B /* Model */,
 				A106314A191951DD0076AA7B /* Events Collection */,
 				A106314B191951FD0076AA7B /* Events Editor */,
 				A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */,
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
-				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
 				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8CF18DF39E700E8B6B2 /* Supporting Files */,
 			);
@@ -499,6 +499,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
@@ -516,6 +517,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",

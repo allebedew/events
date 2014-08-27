@@ -9,11 +9,13 @@
 #import "AEAppDelegate.h"
 
 #import "AEEvent.h"
+#import "AEItemColor.h"
 #import "Flurry.h"
 
 @interface AEAppDelegate ()
 
 @property (nonatomic, strong) UIView *statusBarShader;
+@property (nonatomic, assign) BOOL isFirstLaunch;
 
 @end
 
@@ -22,8 +24,6 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 
 + (AEAppDelegate*)delegate {
   return [UIApplication sharedApplication].delegate;
@@ -34,11 +34,16 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [Flurry startSession:@"6DF95P9PP3ZY42PBW5NV"];
 
-  [self prefillDatabaseIfNeeded];
-//  [self addALotOfRandomEvents];
-
-  [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
-  [[NSUserDefaults standardUserDefaults] synchronize];
+  static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
+  if ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0.0) {
+    self.isFirstLaunch = YES;
+    [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:AEFirstLaunchDefaultsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+  }
+  
+  if (self.isFirstLaunch) {
+    [self addDefaultEvents];
+  }
 
   [self performSelector:@selector(updateStatusBarShaderFrame) withObject:nil afterDelay:0.0f];
 
@@ -56,37 +61,72 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
 
 - (void)addALotOfRandomEvents {
   for (int i = 0; i < 500; ++i) {
-    AEEvent *event = (AEEvent*)[NSEntityDescription insertNewObjectForEntityForName:@"Event"
-                                                             inManagedObjectContext:self.managedObjectContext];
-    [event setInitialValues];
-    event.title = [NSString stringWithFormat:@"Random Event #%d", i];
-
+    NSString *title = [NSString stringWithFormat:@"Random Event #%d", i];
+    
     UInt32 range = 1000000000;
     NSTimeInterval interval = (range / 2) - arc4random_uniform(range);
-    NSLog(@"res interval: %.0f", interval);
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:interval];
 
-    event.date = [NSDate dateWithTimeIntervalSinceNow:interval];
+    [AEEvent eventWithTitle:title date:date color:nil context:self.managedObjectContext insert:YES];
   }
   [self saveContext];
 }
 
-- (void)prefillDatabaseIfNeeded {
-  BOOL firstLaunch = ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0);
-  if (firstLaunch) {
-
-    // Prefill database
-    NSString *prefillFilePath = [[NSBundle mainBundle] pathForResource:@"DatabasePrefill" ofType:@"plist"];
-    NSArray *prefillData = [NSArray arrayWithContentsOfFile:prefillFilePath];
-    for (NSDictionary *eventInfo in prefillData) {
-      AEEvent *event = (AEEvent*)[NSEntityDescription insertNewObjectForEntityForName:@"Event"
-                                                               inManagedObjectContext:self.managedObjectContext];
-      event.title = eventInfo[@"title"];
-      event.date = eventInfo[@"date"];
-      event.order = eventInfo[@"order"];
-      event.colorIdentifier = eventInfo[@"colorIdentifier"];
-    }
-    [self saveContext];
+- (NSDate*)nextChristmassDate {
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSDateComponents *components = [georgian components:NSYearCalendarUnit
+                                             fromDate:[NSDate date]];
+  components.day = 25;
+  components.month = 12;
+  NSDate *date = [georgian dateFromComponents:components];
+  
+  if ([date compare:[NSDate date]] == NSOrderedAscending) {
+    components.year++;
+    date = [georgian dateFromComponents:components];
   }
+  
+  return date;
+}
+
+- (NSDate*)nextNewYearDate {
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSDateComponents *components = [georgian components:NSYearCalendarUnit
+                                             fromDate:[NSDate date]];
+  components.day = 1;
+  components.month = 1;
+  components.year++;
+  NSDate *date = [georgian dateFromComponents:components];
+  return date;
+}
+
+- (NSDate*)iphoneReleaseDate {
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSDateComponents *components = [[NSDateComponents alloc] init];
+  components.day = 29;
+  components.month = 6;
+  components.year = 2007;
+  NSDate *date = [georgian dateFromComponents:components];
+  return date;
+}
+
+- (void)addDefaultEvents {
+  
+  [AEEvent eventWithTitle:NSLocalizedString(@"Christmas", @"event title")
+                     date:[self nextChristmassDate]
+                    color:[AEItemColor colorWithIdentifier:@"indigo"]
+                  context:self.managedObjectContext insert:YES];
+
+  [AEEvent eventWithTitle:NSLocalizedString(@"New Year", @"event title")
+                     date:[self nextNewYearDate]
+                    color:[AEItemColor colorWithIdentifier:@"blue"]
+                  context:self.managedObjectContext insert:YES];
+  
+  [AEEvent eventWithTitle:NSLocalizedString(@"First iPhone Release", @"event title")
+                     date:[self iphoneReleaseDate]
+                    color:[AEItemColor colorWithIdentifier:@"red"]
+                  context:self.managedObjectContext insert:YES];
+  
+  [self saveContext];
 }
 
 - (void)saveContext {
@@ -107,11 +147,9 @@ static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
   NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:entity.name];
   req.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:NO] ];
   req.fetchLimit = 1;
-  req.resultType = NSDictionaryResultType;
-  req.propertiesToFetch = @[ entity.propertiesByName[@"order"] ];
   NSError *error = nil;
   NSArray *result = [self.managedObjectContext executeFetchRequest:req error:&error];
-  NSNumber *maxOrder = result.firstObject[@"order"];
+  NSNumber *maxOrder = ((AEEvent*)[result firstObject]).order;
   if (error) {
     NSLog(@"max order fetch error: %@", error);
     return nil;

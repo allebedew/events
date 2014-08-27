@@ -10,6 +10,7 @@
 
 #import "AEEventCell.h"
 #import "AEEvent.h"
+#import "AEItemColor.h"
 
 @interface AEEventCell ()
 
@@ -41,8 +42,7 @@
   self.backgroundView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
   self.backgroundView.layer.shadowRadius = 3.0f;
   self.backgroundView.layer.shadowOpacity = 0.25f;
-  self.backgroundView.backgroundColor = [UIColor colorWithHue:0.6f saturation:0.81f
-                                                   brightness:0.93f alpha:1.0f];
+  self.backgroundView.backgroundColor = [[[AEItemColor availableColors] firstObject] startColor];
 
   self.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
   self.selectedBackgroundView.layer.cornerRadius = 5.0f;
@@ -71,14 +71,17 @@
 
 - (void)setEvent:(AEEvent *)event {
   _event = event;
-  [self updateContent];
-}
 
-- (void)updateContent {
-  self.titleLabel.text = self.event.title;
-  self.dateLabel.text = self.event.dateString;
+  [self updateEventData];
   [self updateCounterLabels];
   [self setNeedsLayout];
+}
+
+- (void)updateEventData {
+  self.titleLabel.text = self.event.title;
+  self.dateLabel.text = self.event.dateString;
+
+  self.backgroundView.backgroundColor = self.event.color.startColor;
 }
 
 - (void)updateCounterLabels {

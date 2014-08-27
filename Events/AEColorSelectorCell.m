@@ -14,7 +14,7 @@
 
 @interface AEColorSelectorCell ()
 
-@property (nonatomic, weak) IBOutlet UIView *markView;
+@property (nonatomic, weak) IBOutlet UIView *colorView;
 @property (nonatomic, weak) IBOutlet UILabel *colorNameLabel;
 
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
@@ -32,17 +32,6 @@
   self.color = nil;
 }
 
-- (void)prepareMarkView {
-  self.gradientLayer = [[CAGradientLayer alloc] init];
-  self.gradientLayer.frame = self.markView.bounds;
-  [self.markView.layer addSublayer:self.gradientLayer];
-
-  self.markView.layer.cornerRadius = CGRectGetHeight(self.markView.frame) / 2;
-  self.markView.layer.borderColor = [UIColor colorWithWhite:0.5f alpha:1.0f].CGColor;
-  self.markView.layer.borderWidth = 1.0f;
-  self.markView.clipsToBounds = YES;
-}
-
 - (void)setColor:(AEItemColor *)color {
   if (_color != color) {
     _color = color;
@@ -50,14 +39,27 @@
   [self fillData];
 }
 
+#pragma mark - Private
+
+- (void)prepareMarkView {
+  self.gradientLayer = [[CAGradientLayer alloc] init];
+  self.gradientLayer.frame = self.colorView.bounds;
+  [self.colorView.layer addSublayer:self.gradientLayer];
+
+  self.colorView.layer.cornerRadius = CGRectGetHeight(self.colorView.frame) / 2;
+  self.colorView.clipsToBounds = YES;
+}
+
+
 - (void)fillData {
+  self.colorNameLabel.text = self.color.name;
+
   if (self.color) {
     self.gradientLayer.colors = @[(id)[self.color.startColor CGColor],
-                                  (id)[self.color.endColor CGColor]];
+                                  (id)[self.color.startColor CGColor]];
   } else {
     self.gradientLayer.colors = nil;
   }
-  self.colorNameLabel.text = self.color.name;
 }
 
 @end

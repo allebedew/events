@@ -12,6 +12,7 @@
 #import "AEEventCell.h"
 #import "AEEvent.h"
 #import "AEEventEditorViewController.h"
+#import "Flurry.h"
 
 #define COUNTERS_UPDATE_INTERVAL 1.0f
 
@@ -118,14 +119,17 @@
 #pragma mark - Actions
 
 - (void)createEventPressed {
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
-                                            inManagedObjectContext:[AEAppDelegate delegate].managedObjectContext];
-  AEEvent *event = [[AEEvent alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
-  [event setInitialValues];
+  AEEvent *event = [AEEvent eventWithTitle:nil date:nil color:nil context:nil insert:NO];
+  
   [self showEditorForEvent:event completion:^(BOOL cancelled) {
     if (cancelled) {
       return;
     }
+    NSDictionary *flurryParams = @{ @"title": event.title,
+                                    @"date":  @([event.date timeIntervalSince1970]),
+                                    @"color": event.colorIdentifier };
+    [Flurry logEvent:@"event_create" withParameters:flurryParams];
+    
     [[AEAppDelegate delegate].managedObjectContext insertObject:event];
     [[AEAppDelegate delegate] saveContext];
   }];
@@ -136,6 +140,9 @@
   if (!event) {
     return;
   }
+  
+  [Flurry logEvent:@"event_delete"];
+  
   [[AEAppDelegate delegate].managedObjectContext deleteObject:event];
   [[AEAppDelegate delegate] saveContext];
 }
@@ -145,6 +152,9 @@
   if (!event) {
     return;
   }
+  
+  [Flurry logEvent:@"event_edit"];
+  
   [self showEditorForEvent:event completion:^(BOOL cancelled) {
     if (cancelled) {
       [[AEAppDelegate delegate].managedObjectContext rollback];

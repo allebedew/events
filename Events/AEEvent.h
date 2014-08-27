@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) NSString *intervalString;
 @property (nonatomic, strong) AEItemColor *color;
 
-- (void)setInitialValues;
++ (AEEvent*)eventWithTitle:(NSString*)title date:(NSDate*)date color:(AEItemColor*)color
+                   context:(NSManagedObjectContext*)context insert:(BOOL)insert;
 
 @end

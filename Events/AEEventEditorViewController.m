@@ -224,6 +224,11 @@
   [self updateSaveButtonState];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+  [self saveTitleAndHideKeyboard];
+  return NO;
+}
+
 #pragma mark - Table View Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
