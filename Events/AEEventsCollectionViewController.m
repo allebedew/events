@@ -17,7 +17,7 @@
 #define COUNTERS_UPDATE_INTERVAL 1.0f
 
 @interface AEEventsCollectionViewController ()
-  <NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
+  <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, strong) NSFetchedResultsController *resultsController;
 @property (nonatomic, weak) NSTimer *countersUpdateTimer;
@@ -113,6 +113,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     completion(cancelled);
   };
+  eventNavigationController.modalPresentationStyle = UIModalPresentationCustom;
+  eventNavigationController.transitioningDelegate = self;
+  
+  
   [self presentViewController:eventNavigationController animated:YES completion:nil];
 }
 
@@ -261,6 +265,22 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
   } else {
     [self editSelectedEvent];
   }
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+  return self;
+}
+
+#pragma mark - UIViewControllerAnimatedTransitioning
+
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+  return 3;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+  
 }
 
 @end
