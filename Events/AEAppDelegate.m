@@ -10,7 +10,6 @@
 
 #import "AEEvent.h"
 #import "AEItemColor.h"
-#import "Flurry.h"
 
 @interface AEAppDelegate ()
 
@@ -32,7 +31,6 @@
 #pragma mark - App Delegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [Flurry startSession:@"6DF95P9PP3ZY42PBW5NV"];
 
   static NSString *AEFirstLaunchDefaultsKey = @"AEFirstLaunch";
   if ([[NSUserDefaults standardUserDefaults] doubleForKey:AEFirstLaunchDefaultsKey] == 0.0) {
@@ -73,8 +71,8 @@
 }
 
 - (NSDate*)nextChristmassDate {
-  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-  NSDateComponents *components = [georgian components:NSYearCalendarUnit
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDateComponents *components = [georgian components:NSCalendarUnitYear
                                              fromDate:[NSDate date]];
   components.day = 25;
   components.month = 12;
@@ -89,8 +87,8 @@
 }
 
 - (NSDate*)nextNewYearDate {
-  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-  NSDateComponents *components = [georgian components:NSYearCalendarUnit
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDateComponents *components = [georgian components:NSCalendarUnitYear
                                              fromDate:[NSDate date]];
   components.day = 1;
   components.month = 1;
@@ -100,7 +98,7 @@
 }
 
 - (NSDate*)iphoneReleaseDate {
-  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSCalendar *georgian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   NSDateComponents *components = [[NSDateComponents alloc] init];
   components.day = 29;
   components.month = 6;

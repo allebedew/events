@@ -35,7 +35,7 @@
 
 @implementation AEEventEditorViewController
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
   return UIInterfaceOrientationMaskPortrait;
 }
 

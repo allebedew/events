@@ -12,6 +12,8 @@
 #import "AEEvent.h"
 #import "AEItemColor.h"
 
+NSString * const AEEventCellIdentifier = @"AEEventCellIdentifier";
+
 @interface AEEventCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;

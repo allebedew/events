@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>472CFC5840D9258B1E69C4220A2AC32BE3FB3DA1</key>
-		<string>ssh://bitbucket.org/hurma/events.git</string>
+		<string>github.com:allebedew/events.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Events/Events.xcodeproj/project.xcworkspace</string>
+	<string>Events.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>472CFC5840D9258B1E69C4220A2AC32BE3FB3DA1</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/hurma/events.git</string>
+	<string>github.com:allebedew/events.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

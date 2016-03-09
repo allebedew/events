@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A103E5E41C90B3D600D44688 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E31C90B3D600D44688 /* Launch Screen.storyboard */; };
+		A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E51C90B8F900D44688 /* AEEventCell.xib */; };
+		A103E5F21C90BB4500D44688 /* AEDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A103E5F11C90BB4500D44688 /* AEDataStore.m */; };
 		A106314E19196A640076AA7B /* todo in Resources */ = {isa = PBXBuildFile; fileRef = A106314D19196A640076AA7B /* todo */; };
 		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
-		A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
 		A17DD8C918DF39E700E8B6B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */; };
 		A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */; };
@@ -19,45 +21,39 @@
 		A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */; };
 		A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */; };
 		A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */; };
-		A17DD8E518DF39E700E8B6B2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8E418DF39E700E8B6B2 /* XCTest.framework */; };
-		A17DD8E618DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
-		A17DD8E718DF39E700E8B6B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */; };
-		A17DD8E818DF39E700E8B6B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CC18DF39E700E8B6B2 /* CoreData.framework */; };
-		A17DD8F018DF39E700E8B6B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A17DD8EE18DF39E700E8B6B2 /* InfoPlist.strings */; };
-		A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8F118DF39E700E8B6B2 /* EventsTests.m */; };
 		A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
-		A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
-		A17DD94118DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */; };
-		A17DD94218DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */; };
+		A17DD94118DF600F00E8B6B2 /* AEEventsCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */; };
 		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
-		A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 		A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
-		A1A9949518E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
 		A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
-		A1A9949918E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
 		A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78C194B7D60003149A9 /* AEItemColor.m */; };
 		A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */; };
 		A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */; };
 		A1D3C795194B926E003149A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C794194B926E003149A9 /* QuartzCore.framework */; };
-		A1D3C799194B9ED0003149A9 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */; };
 		A1D3C79B194B9F9E003149A9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */; };
 		A1D3C79D194BA941003149A9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1D3C79C194BA941003149A9 /* Localizable.strings */; };
 		A1D3C79F194BA993003149A9 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A1D3C79E194BA993003149A9 /* Localizable.stringsdict */; };
 		A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
-		A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E347A918E8C8C200AE649F /* AEAddEventCell.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		A17DD8E918DF39E700E8B6B2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A17DD8BB18DF39E700E8B6B2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A17DD8C218DF39E700E8B6B2;
-			remoteInfo = Events;
+/* Begin PBXCopyFilesBuildPhase section */
+		A1A7CF2C1B30001D0088BF52 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXContainerItemProxy section */
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A103E5E31C90B3D600D44688 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A103E5E51C90B8F900D44688 /* AEEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AEEventCell.xib; sourceTree = "<group>"; };
+		A103E5F01C90BB4500D44688 /* AEDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDataStore.h; sourceTree = "<group>"; };
+		A103E5F11C90BB4500D44688 /* AEDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDataStore.m; sourceTree = "<group>"; };
 		A106314D19196A640076AA7B /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
 		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
@@ -74,14 +70,9 @@
 		A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEAppDelegate.m; sourceTree = "<group>"; };
 		A17DD8DB18DF39E700E8B6B2 /* Events.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Events.xcdatamodel; sourceTree = "<group>"; };
 		A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A17DD8E318DF39E700E8B6B2 /* EventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A17DD8E418DF39E700E8B6B2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A17DD8ED18DF39E700E8B6B2 /* EventsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EventsTests-Info.plist"; sourceTree = "<group>"; };
-		A17DD8EF18DF39E700E8B6B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A17DD8F118DF39E700E8B6B2 /* EventsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsTests.m; sourceTree = "<group>"; };
 		A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventsCollectionViewController.h; sourceTree = "<group>"; };
-		A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventsCollectionViewController.m; sourceTree = "<group>"; };
+		A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventsCollectionController.h; sourceTree = "<group>"; };
+		A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventsCollectionController.m; sourceTree = "<group>"; };
 		A17DD94318DF689700E8B6B2 /* AEEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventCell.h; sourceTree = "<group>"; };
 		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
 		A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DatabasePrefill.plist; sourceTree = "<group>"; };
@@ -94,8 +85,6 @@
 		A1D3C791194B85AC003149A9 /* AEColorSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEColorSelectorCell.h; sourceTree = "<group>"; };
 		A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEColorSelectorCell.m; sourceTree = "<group>"; };
 		A1D3C794194B926E003149A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A1D3C797194B9ED0003149A9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.0.0.a; sourceTree = "<group>"; };
 		A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A1D3C79C194BA941003149A9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A1D3C79E194BA993003149A9 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Localizable.stringsdict; sourceTree = "<group>"; };
@@ -114,18 +103,6 @@
 				A17DD8CD18DF39E700E8B6B2 /* CoreData.framework in Frameworks */,
 				A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */,
 				A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */,
-				A1D3C799194B9ED0003149A9 /* libFlurry_5.0.0.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A17DD8E018DF39E700E8B6B2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A17DD8E518DF39E700E8B6B2 /* XCTest.framework in Frameworks */,
-				A17DD8E818DF39E700E8B6B2 /* CoreData.framework in Frameworks */,
-				A17DD8E718DF39E700E8B6B2 /* UIKit.framework in Frameworks */,
-				A17DD8E618DF39E700E8B6B2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,10 +112,11 @@
 		A106314A191951DD0076AA7B /* Events Collection */ = {
 			isa = PBXGroup;
 			children = (
-				A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionViewController.h */,
-				A17DD94018DF600F00E8B6B2 /* AEEventsCollectionViewController.m */,
+				A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionController.h */,
+				A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */,
 				A17DD94318DF689700E8B6B2 /* AEEventCell.h */,
 				A17DD94418DF689700E8B6B2 /* AEEventCell.m */,
+				A103E5E51C90B8F900D44688 /* AEEventCell.xib */,
 				A1E347A818E8C8C200AE649F /* AEAddEventCell.h */,
 				A1E347A918E8C8C200AE649F /* AEAddEventCell.m */,
 			);
@@ -161,6 +139,8 @@
 		A106314C191952110076AA7B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A103E5F01C90BB4500D44688 /* AEDataStore.h */,
+				A103E5F11C90BB4500D44688 /* AEDataStore.m */,
 				A1A9949618E794B300E0FA7C /* AEEvent.h */,
 				A1A9949718E794B300E0FA7C /* AEEvent.m */,
 				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
@@ -175,9 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A106314D19196A640076AA7B /* todo */,
-				A1D3C796194B9ED0003149A9 /* Flurry */,
 				A17DD8CE18DF39E700E8B6B2 /* Events */,
-				A17DD8EB18DF39E700E8B6B2 /* EventsTests */,
 				A17DD8C518DF39E700E8B6B2 /* Frameworks */,
 				A17DD8C418DF39E700E8B6B2 /* Products */,
 			);
@@ -187,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				A17DD8C318DF39E700E8B6B2 /* Events.app */,
-				A17DD8E318DF39E700E8B6B2 /* EventsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,7 +178,6 @@
 				A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */,
 				A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */,
 				A17DD8CC18DF39E700E8B6B2 /* CoreData.framework */,
-				A17DD8E418DF39E700E8B6B2 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -217,6 +193,7 @@
 				A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */,
 				A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */,
 				A17DD8CF18DF39E700E8B6B2 /* Supporting Files */,
+				A103E5E31C90B3D600D44688 /* Launch Screen.storyboard */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -234,33 +211,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A17DD8EB18DF39E700E8B6B2 /* EventsTests */ = {
-			isa = PBXGroup;
-			children = (
-				A17DD8F118DF39E700E8B6B2 /* EventsTests.m */,
-				A17DD8EC18DF39E700E8B6B2 /* Supporting Files */,
-			);
-			path = EventsTests;
-			sourceTree = "<group>";
-		};
-		A17DD8EC18DF39E700E8B6B2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A17DD8ED18DF39E700E8B6B2 /* EventsTests-Info.plist */,
-				A17DD8EE18DF39E700E8B6B2 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A1D3C796194B9ED0003149A9 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				A1D3C797194B9ED0003149A9 /* Flurry.h */,
-				A1D3C798194B9ED0003149A9 /* libFlurry_5.0.0.a */,
-			);
-			path = Flurry;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -271,6 +221,7 @@
 				A17DD8BF18DF39E700E8B6B2 /* Sources */,
 				A17DD8C018DF39E700E8B6B2 /* Frameworks */,
 				A17DD8C118DF39E700E8B6B2 /* Resources */,
+				A1A7CF2C1B30001D0088BF52 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -281,24 +232,6 @@
 			productReference = A17DD8C318DF39E700E8B6B2 /* Events.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A17DD8E218DF39E700E8B6B2 /* EventsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A17DD8F818DF39E700E8B6B2 /* Build configuration list for PBXNativeTarget "EventsTests" */;
-			buildPhases = (
-				A17DD8DF18DF39E700E8B6B2 /* Sources */,
-				A17DD8E018DF39E700E8B6B2 /* Frameworks */,
-				A17DD8E118DF39E700E8B6B2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A17DD8EA18DF39E700E8B6B2 /* PBXTargetDependency */,
-			);
-			name = EventsTests;
-			productName = EventsTests;
-			productReference = A17DD8E318DF39E700E8B6B2 /* EventsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -306,13 +239,9 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = AE;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Aleksey Lebedev";
-				TargetAttributes = {
-					A17DD8E218DF39E700E8B6B2 = {
-						TestTargetID = A17DD8C218DF39E700E8B6B2;
-					};
-				};
 			};
 			buildConfigurationList = A17DD8BE18DF39E700E8B6B2 /* Build configuration list for PBXProject "Events" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -320,6 +249,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = A17DD8BA18DF39E700E8B6B2;
 			productRefGroup = A17DD8C418DF39E700E8B6B2 /* Products */;
@@ -327,7 +257,6 @@
 			projectRoot = "";
 			targets = (
 				A17DD8C218DF39E700E8B6B2 /* Events */,
-				A17DD8E218DF39E700E8B6B2 /* EventsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -339,21 +268,13 @@
 			files = (
 				A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
 				A1D3C79D194BA941003149A9 /* Localizable.strings in Resources */,
+				A103E5E41C90B3D600D44688 /* Launch Screen.storyboard in Resources */,
 				A106314E19196A640076AA7B /* todo in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
 				A1D3C79F194BA993003149A9 /* Localizable.stringsdict in Resources */,
 				A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A17DD8E118DF39E700E8B6B2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A17DD8F018DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
-				A1A9949518E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
-				A17DD93E18DF5B1600E8B6B2 /* Main.storyboard in Resources */,
+				A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */,
+				A103E5F21C90BB4500D44688 /* AEDataStore.m in Sources */,
 				A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */,
 				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */,
@@ -374,46 +296,17 @@
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
 				A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */,
 				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
-				A17DD94118DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A17DD8DF18DF39E700E8B6B2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A1A9949918E794B300E0FA7C /* AEEvent.m in Sources */,
-				A17DD8F218DF39E700E8B6B2 /* EventsTests.m in Sources */,
-				A1E347AB18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
-				A17DD94618DF689700E8B6B2 /* AEEventCell.m in Sources */,
-				A11D457C18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
-				A17DD94218DF600F00E8B6B2 /* AEEventsCollectionViewController.m in Sources */,
+				A17DD94118DF600F00E8B6B2 /* AEEventsCollectionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A17DD8EA18DF39E700E8B6B2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A17DD8C218DF39E700E8B6B2 /* Events */;
-			targetProxy = A17DD8E918DF39E700E8B6B2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A17DD8D118DF39E700E8B6B2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A17DD8D218DF39E700E8B6B2 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A17DD8EE18DF39E700E8B6B2 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A17DD8EF18DF39E700E8B6B2 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -453,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -485,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -495,11 +388,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
@@ -513,57 +405,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		A17DD8F918DF39E700E8B6B2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Events.app/Events";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "EventsTests/EventsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		A17DD8FA18DF39E700E8B6B2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Events.app/Events";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
-				INFOPLIST_FILE = "EventsTests/EventsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -584,15 +435,6 @@
 			buildConfigurations = (
 				A17DD8F618DF39E700E8B6B2 /* Debug */,
 				A17DD8F718DF39E700E8B6B2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A17DD8F818DF39E700E8B6B2 /* Build configuration list for PBXNativeTarget "EventsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A17DD8F918DF39E700E8B6B2 /* Debug */,
-				A17DD8FA18DF39E700E8B6B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -50,8 +50,8 @@
     return nil;
   }
 
-  NSUInteger flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
-    NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+  NSUInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay |
+    NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
   NSDate *now = [NSDate date];
   return [[NSCalendar currentCalendar] components:flags
                                          fromDate:[self.date earlierDate:now]
