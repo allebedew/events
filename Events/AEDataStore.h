@@ -15,5 +15,8 @@
 + (instancetype)sharedStore;
 
 - (NSArray<AEEvent *> *)events;
+- (void)addEvent:(AEEvent *)event;
+- (void)removeEventAtIndex:(NSInteger)index;
+- (void)replaceEventAtIndex:(NSInteger)index withEvent:(AEEvent *)event;
 
 @end

@@ -11,6 +11,7 @@
 		A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E51C90B8F900D44688 /* AEEventCell.xib */; };
 		A103E5F21C90BB4500D44688 /* AEDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A103E5F11C90BB4500D44688 /* AEDataStore.m */; };
 		A106314E19196A640076AA7B /* todo in Resources */ = {isa = PBXBuildFile; fileRef = A106314D19196A640076AA7B /* todo */; };
+		A10C593C1D2CF9BB004BE836 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10C593B1D2CF9BB004BE836 /* Realm.framework */; };
 		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
 		A17DD8C918DF39E700E8B6B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */; };
@@ -55,6 +56,7 @@
 		A103E5F01C90BB4500D44688 /* AEDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDataStore.h; sourceTree = "<group>"; };
 		A103E5F11C90BB4500D44688 /* AEDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDataStore.m; sourceTree = "<group>"; };
 		A106314D19196A640076AA7B /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
+		A10C593B1D2CF9BB004BE836 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
 		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
 		A17DD8C318DF39E700E8B6B2 /* Events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Events.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				A17DD8CD18DF39E700E8B6B2 /* CoreData.framework in Frameworks */,
 				A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */,
 				A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */,
+				A10C593C1D2CF9BB004BE836 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +175,7 @@
 		A17DD8C518DF39E700E8B6B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A10C593B1D2CF9BB004BE836 /* Realm.framework */,
 				A1D3C79A194B9F9E003149A9 /* SystemConfiguration.framework */,
 				A1D3C794194B926E003149A9 /* QuartzCore.framework */,
 				A17DD8C618DF39E700E8B6B2 /* Foundation.framework */,
@@ -222,6 +226,7 @@
 				A17DD8C018DF39E700E8B6B2 /* Frameworks */,
 				A17DD8C118DF39E700E8B6B2 /* Resources */,
 				A1A7CF2C1B30001D0088BF52 /* Embed App Extensions */,
+				A10C593D1D2CF9ED004BE836 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -279,6 +284,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A10C593D1D2CF9ED004BE836 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A17DD8BF18DF39E700E8B6B2 /* Sources */ = {
@@ -388,6 +409,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
@@ -405,6 +430,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";

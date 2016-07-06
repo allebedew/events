@@ -25,25 +25,61 @@
     return sharedStore;
 }
 
+#pragma mark - Private
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self loadEventsFromFile];
+        if ([self eventsDataFileExists]) {
+            [self loadEventsFromEventsDataFile];
+        }
     }
     return self;
 }
 
-- (NSString *)eventsFilePath {
-    return @"";
+- (NSString *)eventsDataFilePath {
+    NSString *documentsPath = @"";
+    return [documentsPath stringByAppendingPathComponent:@"events.data"];
 }
 
-- (void)loadEventsFromFile {
-    NSData *eventsData = [NSData dataWithContentsOfFile:[self eventsFilePath]];
-    self.mutableEvents = [NSKeyedUnarchiver unarchiveObjectWithData:eventsData];
+- (BOOL)eventsDataFileExists {
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self eventsDataFilePath]];
 }
+
+- (void)loadEventsFromEventsDataFile {
+    NSData *eventsData = [NSData dataWithContentsOfFile:[self eventsDataFilePath]];
+    if (eventsData) {
+        self.mutableEvents = [NSKeyedUnarchiver unarchiveObjectWithData:eventsData];
+    } else {
+        self.mutableEvents = [NSMutableArray new];
+    }
+}
+
+- (void)createStartupEvents {
+    self.mutableEvents = [NSMutableArray array];
+}
+
+- (void)saveToEventsDataFile {
+    NSData *eventsData = [NSKeyedArchiver archivedDataWithRootObject:self.mutableEvents];
+    [eventsData writeToFile:[self eventsDataFilePath] atomically:YES];
+}
+
+#pragma mark - Public
 
 - (NSArray<AEEvent *> *)events {
     return self.mutableEvents.copy;
+}
+
+- (void)addEvent:(AEEvent *)event {
+
+}
+
+- (void)removeEventAtIndex:(NSInteger)index {
+
+}
+
+- (void)replaceEventAtIndex:(NSInteger)index withEvent:(AEEvent *)event {
+
 }
 
 @end
