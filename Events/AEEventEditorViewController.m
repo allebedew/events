@@ -11,6 +11,7 @@
 #import "AEEvent.h"
 #import "AEColorSelectorViewController.h"
 #import "AEColorSelectorCell.h"
+#import "RLMObject+AEExtentions.h"
 
 #define UPDATE_INTERVAL 1.0f
 
@@ -31,6 +32,10 @@
 @property (nonatomic, strong) NSIndexPath *lastSelectedRow;
 @property (nonatomic, weak) NSTimer *updateTimer;
 
+// State
+@property (nonatomic, assign) BOOL isCreatingNewEvent;
+@property (nonatomic, strong) AEEvent *event;
+
 @end
 
 @implementation AEEventEditorViewController
@@ -41,6 +46,32 @@
 
 - (void)dealloc {
 
+}
+
+- (instancetype)instantiateFromStoryboard {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    return [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([self class])];
+}
+
+- (instancetype)initWithEvent:(AEEvent *)event {
+    if ((self = [self instantiateFromStoryboard])) {
+        NSParameterAssert(event != nil);
+        if (event == nil) {
+            return nil;
+        }
+
+        self.isCreatingNewEvent = NO;
+        self.event = [event ae_unmanagedCopy];
+    }
+    return self;
+}
+
+- (instancetype)initWithCreatingNewEvent {
+    if ((self = [self instantiateFromStoryboard])) {
+        self.isCreatingNewEvent = YES;
+        self.event = [AEEvent new];
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -84,11 +115,14 @@
   }
 }
 
+#pragma mark - Private
+
 - (void)startUpdateTimer {
   [self.updateTimer invalidate];
   self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self
                                                     selector:@selector(updateIntervalLabel)
                                                     userInfo:nil repeats:YES];
+  [self updateIntervalLabel];
 }
 
 - (void)stopUpdateTimer {
@@ -110,7 +144,7 @@
 }
 
 - (void)updateSaveButtonState {
-  self.saveButton.enabled = [self.event validateForUpdate:nil];
+    self.saveButton.enabled = [self.event ae_hasAllRequiredProperties];
 }
 
 - (void)fillViewsWithEventData {
@@ -177,15 +211,17 @@
 #pragma mark - User Actions
 
 - (void)cancelButtonPressed:(id)sender {
-  if (self.doneEditingBlock) {
-    self.doneEditingBlock(YES);
-  }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)saveButtonPressed:(id)sender {
-  if (self.doneEditingBlock) {
-    self.doneEditingBlock(NO);
-  }
+    if (![self.event ae_hasAllRequiredProperties]) {
+        return;
+    }
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [[RLMRealm defaultRealm] addOrUpdateObject:self.event];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneButtonPressed:(id)sender {

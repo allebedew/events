@@ -12,30 +12,50 @@
 #import "AEEventCell.h"
 #import "AEEvent.h"
 #import "AEEventEditorViewController.h"
+#import <Realm/Realm.h>
 
 #define COUNTERS_UPDATE_INTERVAL 1.0f
 
-@interface AEEventsCollectionController ()
-<NSFetchedResultsControllerDelegate, UIActionSheetDelegate>
+@interface AEEventsCollectionController () <UIActionSheetDelegate>
 
-@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSFetchedResultsController *resultsController;
 @property (nonatomic, weak) NSTimer *countersUpdateTimer;
+@property (nonatomic, assign) BOOL ignoreNextUpdate;
+
+@property (nonatomic, strong) RLMResults *events;
+@property (nonatomic, strong) RLMNotificationToken *updateToken;
 
 @end
 
 @implementation AEEventsCollectionController
 
 - (void)dealloc {
+    [self.updateToken stop];
     [self stopCountersUpdateTimer];
+}
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize {
+    self.installsStandardGestureForInteractiveMovement = YES;
+    [self initializeRealm];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([AEEventCell class]) bundle:nil]  forCellWithReuseIdentifier:AEEventCellIdentifier];
-
-    [self.resultsController performFetch:nil];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([AEEventCell class]) bundle:nil]
+          forCellWithReuseIdentifier:AEEventCellIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,27 +75,48 @@
     return UIStatusBarStyleLightContent;
 }
 
-#pragma mark - Properties
-
-- (NSFetchedResultsController*)resultsController {
-    if (!_resultsController) {
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
-        request.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES] ];
-        _resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                 managedObjectContext:[AEAppDelegate delegate].managedObjectContext
-                                                                   sectionNameKeyPath:nil
-                                                                            cacheName:nil];
-        _resultsController.delegate = self;
-    }
-    return _resultsController;
-}
-
 #pragma mark - Private
+
+- (void)initializeRealm {
+    self.events = [[AEEvent allObjects] sortedResultsUsingProperty:@"order" ascending:YES];
+
+    __weak typeof (self) weakSelf = self;
+    self.updateToken = [self.events addNotificationBlock:^(RLMResults *results, RLMCollectionChange *change, NSError *error) {
+        __strong typeof (self) strongSelf = weakSelf;
+        if (error) {
+            NSLog(@"Realm update error: %@", error);
+            return;
+        }
+        if (strongSelf.ignoreNextUpdate) {
+            strongSelf.ignoreNextUpdate = NO;
+            NSLog(@"Ignoring update");
+            return;
+        }
+        NSLog(@"UPD: %@\nCH: %@\nERR: %@", results, change, error);
+
+        UICollectionView *collectionView = strongSelf.collectionView;
+        if (!change) {
+            [collectionView reloadData];
+            return;
+        }
+        if (change.deletions.count > 0) {
+            [collectionView deleteItemsAtIndexPaths:[change deletionsInSection:0]];
+        }
+        if (change.insertions.count > 0) {
+            [collectionView insertItemsAtIndexPaths:[change insertionsInSection:0]];
+        }
+        if (change.modifications.count > 0) {
+            [collectionView reloadItemsAtIndexPaths:[change modificationsInSection:0]];
+        }
+    }];
+    NSLog(@"%@", [RLMRealm defaultRealm].configuration.fileURL);
+}
 
 - (void)startCountersUpdateTimer {
     [self.countersUpdateTimer invalidate];
     self.countersUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:COUNTERS_UPDATE_INTERVAL target:self
                                                               selector:@selector(updateCountersOnVisibleCells) userInfo:nil repeats:YES];
+    [self updateCountersOnVisibleCells];
 }
 
 - (void)stopCountersUpdateTimer {
@@ -90,11 +131,11 @@
     }
 }
 
-- (AEEvent*)eventAtIndexPath:(NSIndexPath*)indexPath {
+- (AEEvent *)eventAtIndexPath:(NSIndexPath*)indexPath {
     if (!indexPath || [self isIndexPathForAddNewCell:indexPath]) {
         return nil;
     }
-    return (AEEvent*)[self.resultsController objectAtIndexPath:indexPath];
+    return (AEEvent *)[self.events objectAtIndex:indexPath.row];
 }
 
 - (BOOL)isIndexPathForAddNewCell:(NSIndexPath*)indexPath {
@@ -106,39 +147,19 @@
                                         animated:YES];
 }
 
-- (void)showEditorForEvent:(AEEvent*)event completion:(void(^)(BOOL cancelled))completion {
-    UINavigationController *eventNavigationController =
-    [self.storyboard instantiateViewControllerWithIdentifier:@"EventEditor"];
-    AEEventEditorViewController *eventEditor = (AEEventEditorViewController*)eventNavigationController.topViewController;
-    eventEditor.event = event;
-    eventEditor.doneEditingBlock = ^(BOOL cancelled) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        completion(cancelled);
-    };
-    eventNavigationController.modalPresentationStyle = UIModalPresentationCustom;
-    //  eventNavigationController.transitioningDelegate = self;
+- (void)presentEditorForEvent:(AEEvent *)event {
+    AEEventEditorViewController *editorController = event ?
+        [[AEEventEditorViewController alloc] initWithEvent:event] :
+        [[AEEventEditorViewController alloc] initWithCreatingNewEvent];
 
-
-    [self presentViewController:eventNavigationController animated:YES completion:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:editorController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - Actions
 
 - (void)createEventPressed {
-    AEEvent *event = [AEEvent eventWithTitle:nil date:nil color:nil context:nil insert:NO];
-
-    [self showEditorForEvent:event completion:^(BOOL cancelled) {
-        if (cancelled) {
-            return;
-        }
-        //    NSDictionary *flurryParams = @{ @"title": event.title,
-        //                                    @"date":  @([event.date timeIntervalSince1970]),
-        //                                    @"color": event.colorIdentifier };
-        //    [Flurry logEvent:@"event_create" withParameters:flurryParams];
-        //
-        [[AEAppDelegate delegate].managedObjectContext insertObject:event];
-        [[AEAppDelegate delegate] saveContext];
-    }];
+    [self presentEditorForEvent:nil];
 }
 
 - (void)deleteSelectedEvent {
@@ -146,11 +167,9 @@
     if (!event) {
         return;
     }
-
-    //  [Flurry logEvent:@"event_delete"];
-
-    [[AEAppDelegate delegate].managedObjectContext deleteObject:event];
-    [[AEAppDelegate delegate] saveContext];
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        [[RLMRealm defaultRealm] deleteObject:event];
+    }];
 }
 
 - (void)editSelectedEvent {
@@ -158,59 +177,7 @@
     if (!event) {
         return;
     }
-
-    //  [Flurry logEvent:@"event_edit"];
-
-    [self showEditorForEvent:event completion:^(BOOL cancelled) {
-        if (cancelled) {
-            [[AEAppDelegate delegate].managedObjectContext rollback];
-            return;
-        }
-        [[AEAppDelegate delegate] saveContext];
-    }];
-}
-
-#pragma mark - Fetched Results Delegate
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.collectionView insertItemsAtIndexPaths:@[ newIndexPath ]];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.collectionView deleteItemsAtIndexPaths:@[ indexPath ]];
-            break;
-        case NSFetchedResultsChangeUpdate: {
-            AEEventCell *cell = (AEEventCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-            [self configureEventCell:cell atIndexPath:indexPath];
-            break;
-        }
-        case NSFetchedResultsChangeMove:
-            [self.collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self presentEditorForEvent:event];
 }
 
 #pragma mark - Collection View Delegate
@@ -222,8 +189,7 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = self.resultsController.sections.firstObject;
-    return [sectionInfo numberOfObjects] + 1;
+    return self.events.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -239,7 +205,7 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
 }
 
 - (void)configureEventCell:(AEEventCell*)cell atIndexPath:(NSIndexPath*)indexPath {
-    AEEvent *event = [self.resultsController objectAtIndexPath:indexPath];
+    AEEvent *event = [self.events objectAtIndex:indexPath.row];
     cell.event = event;
 }
 
@@ -256,6 +222,38 @@ static NSString *AEAddEventCellIdentifier = @"AddEventCell";
                                                   otherButtonTitles:NSLocalizedString(@"Edit", nil), nil];
         [sheet showInView:self.view];
     }
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self isIndexPathForAddNewCell:indexPath] ? NO : YES;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+    moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+            toIndexPath:(NSIndexPath *)destinationIndexPath {
+
+    if ([self isIndexPathForAddNewCell:destinationIndexPath]) {
+        [collectionView moveItemAtIndexPath:destinationIndexPath toIndexPath:sourceIndexPath];
+        return;
+    }
+
+    AEEvent *sourceEvent = [self.events objectAtIndex:sourceIndexPath.row];
+    AEEvent *destEvent = [self.events objectAtIndex:destinationIndexPath.row];
+
+    self.ignoreNextUpdate = YES;
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        NSInteger destOrder = destEvent.order;
+        if (sourceEvent.order < destEvent.order) {
+            for (AEEvent *event in [self.events objectsWhere:@"order > %d AND order <= %d", sourceEvent.order, destEvent.order]) {
+                event.order --;
+            }
+        } else {
+            for (AEEvent *event in [self.events objectsWhere:@"order >= %d AND order < %d", destEvent.order, sourceEvent.order]) {
+                event.order ++;
+            }
+        }
+        sourceEvent.order = destOrder;
+    }];
 }
 
 #pragma mark - Action Sheet Delegate

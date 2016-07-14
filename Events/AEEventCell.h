@@ -14,7 +14,7 @@ extern NSString * const AEEventCellIdentifier;
 
 @interface AEEventCell : UICollectionViewCell
 
-@property (nonatomic, weak) AEEvent *event;
+@property (nonatomic, strong) AEEvent *event;
 
 - (void)updateCounterLabels;
 

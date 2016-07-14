@@ -7,23 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <Realm/Realm.h>
 
 @class AEItemColor;
 
-@interface AEEvent : NSManagedObject
+@interface AEEvent : RLMObject
 
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSNumber *order;
-@property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) NSString *colorIdentifier;
+#pragma mark - Realm
+
+@property NSInteger id;
+@property NSString *title;
+@property NSInteger order;
+@property NSDate *date;
+@property NSString *colorIdentifier;
+
+#pragma mark - Custom Properties
 
 @property (nonatomic, readonly) NSString *dateString;
 @property (nonatomic, readonly) NSDateComponents *intervalDateComponents;
 @property (nonatomic, readonly) NSString *intervalString;
 @property (nonatomic, strong) AEItemColor *color;
-
-+ (AEEvent*)eventWithTitle:(NSString*)title date:(NSDate*)date color:(AEItemColor*)color
-                   context:(NSManagedObjectContext*)context insert:(BOOL)insert;
 
 @end

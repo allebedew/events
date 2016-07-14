@@ -15,8 +15,8 @@
 @property (nonatomic, readonly) UIColor *startColor;
 @property (nonatomic, readonly) UIColor *endColor;
 
-+ (NSArray*)availableColors;
-+ (AEItemColor*)randomColor;
-+ (AEItemColor*)colorWithIdentifier:(NSString*)identifier;
++ (NSArray *)availableColors;
++ (AEItemColor *)randomColor;
++ (AEItemColor *)colorWithIdentifier:(NSString*)identifier;
 
 @end

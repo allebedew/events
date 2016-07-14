@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A73B40A4227401D59500074 /* Pods_Events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8BADF18F996E514453BE4D /* Pods_Events.framework */; };
 		A103E5E41C90B3D600D44688 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E31C90B3D600D44688 /* Launch Screen.storyboard */; };
 		A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E51C90B8F900D44688 /* AEEventCell.xib */; };
-		A103E5F21C90BB4500D44688 /* AEDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A103E5F11C90BB4500D44688 /* AEDataStore.m */; };
 		A106314E19196A640076AA7B /* todo in Resources */ = {isa = PBXBuildFile; fileRef = A106314D19196A640076AA7B /* todo */; };
 		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
+		A16CF7251D3654EE0041CDE7 /* RLMObject+AEExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16CF7241D3654EE0041CDE7 /* RLMObject+AEExtentions.m */; };
+		A16CF7281D3669580041CDE7 /* UIColor+AEExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16CF7271D3669580041CDE7 /* UIColor+AEExtentions.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
 		A17DD8C918DF39E700E8B6B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */; };
 		A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */; };
@@ -19,12 +21,10 @@
 		A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A17DD8D118DF39E700E8B6B2 /* InfoPlist.strings */; };
 		A17DD8D518DF39E700E8B6B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8D418DF39E700E8B6B2 /* main.m */; };
 		A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */; };
-		A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */; };
 		A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */; };
 		A17DD93D18DF5B1600E8B6B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */; };
 		A17DD94118DF600F00E8B6B2 /* AEEventsCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */; };
 		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
-		A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */; };
 		A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
 		A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78C194B7D60003149A9 /* AEItemColor.m */; };
 		A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */; };
@@ -37,13 +37,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1DAC1F1A838FE5B31C73AD61 /* Pods-Events.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Events.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Events/Pods-Events.debug.xcconfig"; sourceTree = "<group>"; };
+		6F8BADF18F996E514453BE4D /* Pods_Events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A103E5E31C90B3D600D44688 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A103E5E51C90B8F900D44688 /* AEEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AEEventCell.xib; sourceTree = "<group>"; };
-		A103E5F01C90BB4500D44688 /* AEDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDataStore.h; sourceTree = "<group>"; };
-		A103E5F11C90BB4500D44688 /* AEDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDataStore.m; sourceTree = "<group>"; };
 		A106314D19196A640076AA7B /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
 		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
+		A16CF7231D3654EE0041CDE7 /* RLMObject+AEExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMObject+AEExtentions.h"; sourceTree = "<group>"; };
+		A16CF7241D3654EE0041CDE7 /* RLMObject+AEExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RLMObject+AEExtentions.m"; sourceTree = "<group>"; };
+		A16CF7261D3669580041CDE7 /* UIColor+AEExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AEExtentions.h"; sourceTree = "<group>"; };
+		A16CF7271D3669580041CDE7 /* UIColor+AEExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AEExtentions.m"; sourceTree = "<group>"; };
 		A17DD8C318DF39E700E8B6B2 /* Events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Events.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17DD8C618DF39E700E8B6B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,14 +59,12 @@
 		A17DD8D618DF39E700E8B6B2 /* Events-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Events-Prefix.pch"; sourceTree = "<group>"; };
 		A17DD8D718DF39E700E8B6B2 /* AEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEAppDelegate.h; sourceTree = "<group>"; };
 		A17DD8D818DF39E700E8B6B2 /* AEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEAppDelegate.m; sourceTree = "<group>"; };
-		A17DD8DB18DF39E700E8B6B2 /* Events.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Events.xcdatamodel; sourceTree = "<group>"; };
 		A17DD8DD18DF39E700E8B6B2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A17DD93F18DF600F00E8B6B2 /* AEEventsCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventsCollectionController.h; sourceTree = "<group>"; };
 		A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventsCollectionController.m; sourceTree = "<group>"; };
 		A17DD94318DF689700E8B6B2 /* AEEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventCell.h; sourceTree = "<group>"; };
 		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
-		A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DatabasePrefill.plist; sourceTree = "<group>"; };
 		A1A9949618E794B300E0FA7C /* AEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEvent.h; sourceTree = "<group>"; };
 		A1A9949718E794B300E0FA7C /* AEEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEvent.m; sourceTree = "<group>"; };
 		A1D3C78B194B7D60003149A9 /* AEItemColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEItemColor.h; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		A1D3C79E194BA993003149A9 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		A1E347A818E8C8C200AE649F /* AEAddEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAddEventCell.h; sourceTree = "<group>"; };
 		A1E347A918E8C8C200AE649F /* AEAddEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAddEventCell.m; sourceTree = "<group>"; };
+		E5561A7E134DF7AD8D059962 /* Pods-Events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Events.release.xcconfig"; path = "Pods/Target Support Files/Pods-Events/Pods-Events.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +93,22 @@
 				A17DD8CD18DF39E700E8B6B2 /* CoreData.framework in Frameworks */,
 				A17DD8CB18DF39E700E8B6B2 /* UIKit.framework in Frameworks */,
 				A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */,
+				6A73B40A4227401D59500074 /* Pods_Events.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		547FD1E9AE74F6CE58239A32 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1DAC1F1A838FE5B31C73AD61 /* Pods-Events.debug.xcconfig */,
+				E5561A7E134DF7AD8D059962 /* Pods-Events.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A106314A191951DD0076AA7B /* Events Collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,16 +139,23 @@
 		A106314C191952110076AA7B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A103E5F01C90BB4500D44688 /* AEDataStore.h */,
-				A103E5F11C90BB4500D44688 /* AEDataStore.m */,
 				A1A9949618E794B300E0FA7C /* AEEvent.h */,
 				A1A9949718E794B300E0FA7C /* AEEvent.m */,
-				A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */,
-				A1A9949318E78F2D00E0FA7C /* DatabasePrefill.plist */,
 				A1D3C78B194B7D60003149A9 /* AEItemColor.h */,
 				A1D3C78C194B7D60003149A9 /* AEItemColor.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		A16CF7221D3654970041CDE7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A16CF7231D3654EE0041CDE7 /* RLMObject+AEExtentions.h */,
+				A16CF7241D3654EE0041CDE7 /* RLMObject+AEExtentions.m */,
+				A16CF7261D3669580041CDE7 /* UIColor+AEExtentions.h */,
+				A16CF7271D3669580041CDE7 /* UIColor+AEExtentions.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		A17DD8BA18DF39E700E8B6B2 = {
@@ -145,6 +165,7 @@
 				A17DD8CE18DF39E700E8B6B2 /* Events */,
 				A17DD8C518DF39E700E8B6B2 /* Frameworks */,
 				A17DD8C418DF39E700E8B6B2 /* Products */,
+				547FD1E9AE74F6CE58239A32 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +186,7 @@
 				A17DD8C818DF39E700E8B6B2 /* CoreGraphics.framework */,
 				A17DD8CA18DF39E700E8B6B2 /* UIKit.framework */,
 				A17DD8CC18DF39E700E8B6B2 /* CoreData.framework */,
+				6F8BADF18F996E514453BE4D /* Pods_Events.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				A17DD93C18DF5B1600E8B6B2 /* Main.storyboard */,
+				A16CF7221D3654970041CDE7 /* Categories */,
 				A106314C191952110076AA7B /* Model */,
 				A106314A191951DD0076AA7B /* Events Collection */,
 				A106314B191951FD0076AA7B /* Events Editor */,
@@ -205,9 +228,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A17DD8F518DF39E700E8B6B2 /* Build configuration list for PBXNativeTarget "Events" */;
 			buildPhases = (
+				E021574E5B8AF98ECE39BF85 /* [CP] Check Pods Manifest.lock */,
 				A17DD8BF18DF39E700E8B6B2 /* Sources */,
 				A17DD8C018DF39E700E8B6B2 /* Frameworks */,
 				A17DD8C118DF39E700E8B6B2 /* Resources */,
+				B9BA04BD43E821C0EE173FC1 /* [CP] Embed Pods Frameworks */,
+				54057C11CA264807743015EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,7 +284,6 @@
 				A106314E19196A640076AA7B /* todo in Resources */,
 				A17DD8D318DF39E700E8B6B2 /* InfoPlist.strings in Resources */,
 				A1D3C79F194BA993003149A9 /* Localizable.stringsdict in Resources */,
-				A1A9949418E78F2D00E0FA7C /* DatabasePrefill.plist in Resources */,
 				A17DD8DE18DF39E700E8B6B2 /* Images.xcassets in Resources */,
 				A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */,
 			);
@@ -266,19 +291,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54057C11CA264807743015EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Events/Pods-Events-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9BA04BD43E821C0EE173FC1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Events/Pods-Events-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E021574E5B8AF98ECE39BF85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A17DD8BF18DF39E700E8B6B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */,
-				A103E5F21C90BB4500D44688 /* AEDataStore.m in Sources */,
 				A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */,
 				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
 				A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */,
-				A17DD8DC18DF39E700E8B6B2 /* Events.xcdatamodeld in Sources */,
+				A16CF7281D3669580041CDE7 /* UIColor+AEExtentions.m in Sources */,
 				A1E347AA18E8C8C200AE649F /* AEAddEventCell.m in Sources */,
 				A17DD8D918DF39E700E8B6B2 /* AEAppDelegate.m in Sources */,
+				A16CF7251D3654EE0041CDE7 /* RLMObject+AEExtentions.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
 				A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */,
 				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
@@ -372,33 +445,31 @@
 		};
 		A17DD8F618DF39E700E8B6B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DAC1F1A838FE5B31C73AD61 /* Pods-Events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				PRODUCT_NAME = Events;
 			};
 			name = Debug;
 		};
 		A17DD8F718DF39E700E8B6B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5561A7E134DF7AD8D059962 /* Pods-Events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Events/Events-Prefix.pch";
 				INFOPLIST_FILE = "Events/Events-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				PRODUCT_NAME = Events;
 			};
 			name = Release;
 		};
@@ -424,19 +495,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A17DD8DA18DF39E700E8B6B2 /* Events.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A17DD8DB18DF39E700E8B6B2 /* Events.xcdatamodel */,
-			);
-			currentVersion = A17DD8DB18DF39E700E8B6B2 /* Events.xcdatamodel */;
-			path = Events.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A17DD8BB18DF39E700E8B6B2 /* Project object */;
 }

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AEEventsCollectionController : UIViewController
+@interface AEEventsCollectionController : UICollectionViewController
 
 @end

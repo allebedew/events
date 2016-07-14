@@ -12,7 +12,9 @@
 
 @interface AEEventEditorViewController : UITableViewController
 
-@property (nonatomic, strong) AEEvent *event;
-@property (nonatomic, copy) void(^doneEditingBlock)(BOOL cancelled);
+- (instancetype)initWithEvent:(AEEvent *)event;
+- (instancetype)initWithCreatingNewEvent;
+
+@property (nonatomic, readonly) AEEvent *event;
 
 @end

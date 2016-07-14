@@ -93,7 +93,6 @@ NSString * const AEEventCellIdentifier = @"AEEventCellIdentifier";
     [[NSString localizedStringWithFormat:
       NSLocalizedString(@"%d years", @""), components.year] uppercaseString];
 
-
   self.monthLabel.text = [NSString stringWithFormat:@"%.1ld", (long)components.month];
   self.monthUnitLabel.text =
     [[NSString localizedStringWithFormat:

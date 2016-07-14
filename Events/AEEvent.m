@@ -13,24 +13,30 @@
 
 @implementation AEEvent
 
-@dynamic date, title, order, colorIdentifier;
+#pragma mark - Realm
 
-#pragma mark - Public
++ (NSDictionary *)defaultPropertyValues {
+    RLMResults *allObjects = [[self class] allObjects];
+    NSInteger nextId = [[allObjects maxOfProperty:[[self class] primaryKey]] integerValue] + 1;
+    NSInteger nextOrder = [[allObjects maxOfProperty:@"order"] integerValue] + 1;
+    return @{
+        @"id": @(nextId),
+        @"order": @(nextOrder),
+        @"date": [NSDate date],
+        @"colorIdentifier": [AEItemColor randomColor].identifier
+    };
+}
 
-+ (AEEvent*)eventWithTitle:(NSString*)title date:(NSDate*)date color:(AEItemColor*)color
-                   context:(NSManagedObjectContext*)context insert:(BOOL)insert {
-  if (!context) {
-    context = [AEAppDelegate delegate].managedObjectContext;
-  }
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event"
-                                            inManagedObjectContext:context];
-  AEEvent *event = [[AEEvent alloc] initWithEntity:entity
-                    insertIntoManagedObjectContext:insert ? context : nil];
-  event.title = title;
-  event.date = date ? date : [NSDate date];
-  event.color = color ? color : [AEItemColor randomColor];
-  event.order = @([[[AEAppDelegate delegate] fetchLastOrderValue] integerValue] + 1);
-  return event;
++ (NSString *)primaryKey {
+    return @"id";
+}
+
++ (NSArray *)ignoredProperties {
+    return @[ @"dateString", @"intervalDateComponents", @"intervalString", @"color" ];
+}
+
++ (NSArray *)requiredProperties {
+    return @[ @"title", @"colorIdentifier", @"date" ];
 }
 
 #pragma mark - Custom Properties
@@ -82,7 +88,7 @@
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d minutes", @""), components.minute];
     [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.minute, unit]];
   }
-  if (components.second > 0) {
+  if (components.second > 0 || stringComponents.count == 0) {
     NSString *unit = [NSString localizedStringWithFormat:NSLocalizedString(@"%d seconds", @""), components.second];
     [stringComponents addObject:[NSString stringWithFormat:@"%ld %@", (long)components.second, unit]];
   }
