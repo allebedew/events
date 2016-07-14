@@ -27,6 +27,7 @@
 		A17DD94118DF600F00E8B6B2 /* AEEventsCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94018DF600F00E8B6B2 /* AEEventsCollectionController.m */; };
 		A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A17DD94418DF689700E8B6B2 /* AEEventCell.m */; };
 		A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A9949718E794B300E0FA7C /* AEEvent.m */; };
+		A1C4426B1D37C51E00237624 /* Events.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1C442691D37C51E00237624 /* Events.xcdatamodeld */; };
 		A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78C194B7D60003149A9 /* AEItemColor.m */; };
 		A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C78F194B834D003149A9 /* AEColorSelectorViewController.m */; };
 		A1D3C793194B85AC003149A9 /* AEColorSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D3C792194B85AC003149A9 /* AEColorSelectorCell.m */; };
@@ -70,6 +71,7 @@
 		A17DD94418DF689700E8B6B2 /* AEEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventCell.m; sourceTree = "<group>"; };
 		A1A9949618E794B300E0FA7C /* AEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEvent.h; sourceTree = "<group>"; };
 		A1A9949718E794B300E0FA7C /* AEEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEvent.m; sourceTree = "<group>"; };
+		A1C4426A1D37C51E00237624 /* Events.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Events.xcdatamodel; sourceTree = "<group>"; };
 		A1D3C78B194B7D60003149A9 /* AEItemColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEItemColor.h; sourceTree = "<group>"; };
 		A1D3C78C194B7D60003149A9 /* AEItemColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEItemColor.m; sourceTree = "<group>"; };
 		A1D3C78E194B834D003149A9 /* AEColorSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEColorSelectorViewController.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				A17DD8D118DF39E700E8B6B2 /* InfoPlist.strings */,
 				A17DD8D418DF39E700E8B6B2 /* main.m */,
 				A17DD8D618DF39E700E8B6B2 /* Events-Prefix.pch */,
+				A1C442691D37C51E00237624 /* Events.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1C4426B1D37C51E00237624 /* Events.xcdatamodeld in Sources */,
 				A1A9949818E794B300E0FA7C /* AEEvent.m in Sources */,
 				A1D3C78D194B7D60003149A9 /* AEItemColor.m in Sources */,
 				A17DD94518DF689700E8B6B2 /* AEEventCell.m in Sources */,
@@ -501,6 +505,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A1C442691D37C51E00237624 /* Events.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A1C4426A1D37C51E00237624 /* Events.xcdatamodel */,
+			);
+			currentVersion = A1C4426A1D37C51E00237624 /* Events.xcdatamodel */;
+			path = Events.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A17DD8BB18DF39E700E8B6B2 /* Project object */;
 }

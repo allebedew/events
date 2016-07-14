@@ -53,6 +53,8 @@ NSString * const AEEventCellIdentifier = @"AEEventCellIdentifier";
 
 - (void)prepareForReuse {
   self.event = nil;
+    self.selected = NO;
+    self.highlighted = NO;
 }
 
 - (void)layoutSubviews {

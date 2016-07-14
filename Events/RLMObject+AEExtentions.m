@@ -46,7 +46,9 @@
 
 + (void)ae_setupAutoincrementForProperties:(NSArray<NSString *> *)properties
                                  onObjects:(NSArray<RLMObject *> *)objects {
-    NSParameterAssert(objects.count > 0);
+    if (objects.count == 0) {
+        return;
+    }
 
     Class ObjectClass = NSClassFromString([[(RLMObject *)objects.firstObject class] className]);
 
