@@ -44,4 +44,24 @@
     return YES;
 }
 
++ (void)ae_setupAutoincrementForProperties:(NSArray<NSString *> *)properties
+                                 onObjects:(NSArray<RLMObject *> *)objects {
+    NSParameterAssert(objects.count > 0);
+
+    Class ObjectClass = NSClassFromString([[(RLMObject *)objects.firstObject class] className]);
+
+    NSMutableDictionary<NSString *, NSNumber *> *values = [NSMutableDictionary new];
+    RLMResults *allObjects = [ObjectClass allObjects];
+    for (NSString *property in properties) {
+        values[property] = [allObjects maxOfProperty:property];
+    }
+
+    for (RLMObject *object in objects) {
+        for (NSString *property in properties) {
+            values[property] = @(values[property].integerValue + 1);
+            [object setValue:values[property] forKey:property];
+        }
+    }
+}
+
 @end

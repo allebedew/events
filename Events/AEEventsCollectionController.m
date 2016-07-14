@@ -92,10 +92,17 @@
             NSLog(@"Ignoring update");
             return;
         }
-        NSLog(@"UPD: %@\nCH: %@\nERR: %@", results, change, error);
+
+//        NSLog(@"UPD: %@\nCH: %@\nERR: %@", results, change, error);
 
         UICollectionView *collectionView = strongSelf.collectionView;
         if (!change) {
+            [collectionView reloadData];
+            return;
+        }
+        BOOL changeValid = (results.count == ([collectionView numberOfItemsInSection:0] - 1) + change.insertions.count - change.deletions.count);
+        if (!changeValid) {
+            NSLog(@"Reloading due to invalid change");
             [collectionView reloadData];
             return;
         }

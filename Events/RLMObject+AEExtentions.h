@@ -14,4 +14,7 @@
 
 - (BOOL)ae_hasAllRequiredProperties;
 
++ (void)ae_setupAutoincrementForProperties:(NSArray<NSString *> *)properties
+                                 onObjects:(NSArray<RLMObject *> *)objects;
+
 @end

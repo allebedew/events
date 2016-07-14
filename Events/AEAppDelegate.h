@@ -10,7 +10,8 @@
 
 @interface AEAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, readonly) BOOL isFirstLaunch;
 
 + (AEAppDelegate*)delegate;
 

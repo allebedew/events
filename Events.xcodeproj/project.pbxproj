@@ -12,6 +12,7 @@
 		A103E5E61C90B8F900D44688 /* AEEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103E5E51C90B8F900D44688 /* AEEventCell.xib */; };
 		A106314E19196A640076AA7B /* todo in Resources */ = {isa = PBXBuildFile; fileRef = A106314D19196A640076AA7B /* todo */; };
 		A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11D457A18EB6498003C163D /* AEEventEditorViewController.m */; };
+		A15D223B1D377448007B6A5E /* AEDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A15D223A1D377448007B6A5E /* AEDataStore.m */; };
 		A16CF7251D3654EE0041CDE7 /* RLMObject+AEExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16CF7241D3654EE0041CDE7 /* RLMObject+AEExtentions.m */; };
 		A16CF7281D3669580041CDE7 /* UIColor+AEExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16CF7271D3669580041CDE7 /* UIColor+AEExtentions.m */; };
 		A17DD8C718DF39E700E8B6B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17DD8C618DF39E700E8B6B2 /* Foundation.framework */; };
@@ -44,6 +45,8 @@
 		A106314D19196A640076AA7B /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		A11D457918EB6498003C163D /* AEEventEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEEventEditorViewController.h; sourceTree = "<group>"; };
 		A11D457A18EB6498003C163D /* AEEventEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEEventEditorViewController.m; sourceTree = "<group>"; };
+		A15D22391D377448007B6A5E /* AEDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDataStore.h; sourceTree = "<group>"; };
+		A15D223A1D377448007B6A5E /* AEDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDataStore.m; sourceTree = "<group>"; };
 		A16CF7231D3654EE0041CDE7 /* RLMObject+AEExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMObject+AEExtentions.h"; sourceTree = "<group>"; };
 		A16CF7241D3654EE0041CDE7 /* RLMObject+AEExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RLMObject+AEExtentions.m"; sourceTree = "<group>"; };
 		A16CF7261D3669580041CDE7 /* UIColor+AEExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AEExtentions.h"; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 		A106314C191952110076AA7B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A15D22391D377448007B6A5E /* AEDataStore.h */,
+				A15D223A1D377448007B6A5E /* AEDataStore.m */,
 				A1A9949618E794B300E0FA7C /* AEEvent.h */,
 				A1A9949718E794B300E0FA7C /* AEEvent.m */,
 				A1D3C78B194B7D60003149A9 /* AEItemColor.h */,
@@ -354,6 +359,7 @@
 				A16CF7251D3654EE0041CDE7 /* RLMObject+AEExtentions.m in Sources */,
 				A17DD8D518DF39E700E8B6B2 /* main.m in Sources */,
 				A1D3C790194B834D003149A9 /* AEColorSelectorViewController.m in Sources */,
+				A15D223B1D377448007B6A5E /* AEDataStore.m in Sources */,
 				A11D457B18EB6498003C163D /* AEEventEditorViewController.m in Sources */,
 				A17DD94118DF600F00E8B6B2 /* AEEventsCollectionController.m in Sources */,
 			);
